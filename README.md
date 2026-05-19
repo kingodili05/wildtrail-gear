@@ -8,8 +8,20 @@ Luxury Tactical Expedition Outfitter — a Next.js 15 / React 19 e-commerce surf
 - **TypeScript** strict mode
 - **Tailwind CSS 3.4** — dark-first, custom tactical palette
 - **Zustand 5** — cart state, persisted to localStorage; live-stream state ephemeral
+- **react-three-fiber + drei + three** — 3D hero topographic mesh
+- **framer-motion** — scroll-reveal + stagger
 - **lucide-react** — interface iconography
 - **Rajdhani** (display) + **Geist** (sans/mono) fonts
+
+## 3D design choices
+
+Per `DESIGN.md` "3D used like spice, not sauce." Three 3D moments:
+
+1. **Hero** — `components/TerrainScene.tsx`. Animated wireframe topographic mesh + safety-orange dust particle field + slow camera drift. Disabled when `prefers-reduced-motion: reduce`. Loaded via `next/dynamic` with `ssr: false` so the R3F bundle stays out of the SSR critical path.
+2. **TiltCard** — `components/TiltCard.tsx`. CSS-perspective 3D tilt on pointer move with radial glare. Used on category tiles and product cards. Skips touch input.
+3. **Radar** — `components/Radar.tsx`. SVG-based animated radar sweep with intensity-tracked ping markers, sits in the live-stream sidebar. Reads as operator console.
+
+`Reveal` and `Stagger` (`components/Reveal.tsx`) drive framer-motion scroll-reveals across the site.
 
 ## Palette
 

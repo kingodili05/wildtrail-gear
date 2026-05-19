@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { Radio, Eye, Maximize2, Volume2, Play } from 'lucide-react';
 import { useLive } from '@/lib/store';
 import { compact } from '@/lib/format';
+import Radar from './Radar';
+import Reveal from './Reveal';
 
 function formatElapsed(startedAt: number | null): string {
   if (!startedAt) return '00:00:00';
@@ -28,10 +30,10 @@ export default function LiveStreamModule({ embedded = true }: { embedded?: boole
     return () => clearInterval(t);
   }, [isLive, startedAt]);
 
-  return (
-    <section className={embedded ? 'py-24 md:py-32 bg-ink-900 border-y border-bone-50/[0.06]' : ''}>
-      <div className="container-wt">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr,1fr] gap-px bg-bone-50/[0.06]">
+  const body = (
+    <div className="container-wt">
+      <Reveal>
+        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr,1fr] gap-px bg-bone-50/[0.06] border border-bone-50/[0.06]">
           <div className="relative bg-ink-950 overflow-hidden aspect-video">
             <div
               className="absolute inset-0 bg-cover bg-center"
@@ -103,9 +105,14 @@ export default function LiveStreamModule({ embedded = true }: { embedded?: boole
           </div>
 
           <aside className="bg-ink-900 p-8 md:p-10 flex flex-col gap-6">
-            <div>
-              <div className="eyebrow mb-3">Live From The Field</div>
-              <h3 className="display-h2 text-bone-50">Basecamp-07 / 4K Bonded Feed</h3>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <div className="eyebrow mb-3">Live From The Field</div>
+                <h3 className="display-h2 text-bone-50">Basecamp-07 / 4K Bonded Feed</h3>
+              </div>
+              <div className="hidden lg:block">
+                <Radar size={120} />
+              </div>
             </div>
             <p className="text-bone-200 leading-relaxed">
               Streaming natively to the site through the ApexStream Live-Pack Pro. Bonded
@@ -128,7 +135,15 @@ export default function LiveStreamModule({ embedded = true }: { embedded?: boole
             </div>
           </aside>
         </div>
-      </div>
+      </Reveal>
+    </div>
+  );
+
+  return (
+    <section
+      className={embedded ? 'py-24 md:py-32 bg-ink-900 border-y border-bone-50/[0.06]' : ''}
+    >
+      {body}
     </section>
   );
 }
