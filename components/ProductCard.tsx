@@ -69,8 +69,9 @@ export default function ProductCard({
         </div>
 
         <div className="flex-1 flex flex-col p-6">
-          <div className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-bone-300 mb-2">
-            SKU {product.id}
+          <div className="flex items-center justify-between gap-3 mb-2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-bone-300">
+            <span>SKU {product.sku ?? product.id}</span>
+            {product.mfr && <span className="text-bone-400">MFR · {product.mfr}</span>}
           </div>
           <h3 className="display-h3 text-bone-50 mb-3">{product.name}</h3>
           <p className="text-sm text-bone-300 leading-relaxed flex-1">{product.description}</p>
@@ -87,11 +88,23 @@ export default function ProductCard({
           <div className="mt-6 pt-5 border-t border-bone-50/[0.06] flex items-end justify-between gap-3">
             <div>
               <div className="font-mono text-[0.6rem] uppercase tracking-[0.3em] text-bone-300 mb-1">
-                Price
+                {product.origPrice ? 'Sale Price' : 'Price'}
               </div>
-              <div className="font-display font-bold text-2xl text-bone-50 tabular-nums">
-                {money(product.price)}
+              <div className="flex items-baseline gap-2">
+                <div className="font-display font-bold text-2xl text-bone-50 tabular-nums">
+                  {money(product.price)}
+                </div>
+                {product.origPrice && (
+                  <div className="font-display font-medium text-sm text-bone-400 tabular-nums line-through">
+                    {money(product.origPrice)}
+                  </div>
+                )}
               </div>
+              {product.availability && (
+                <div className="font-mono text-[0.6rem] uppercase tracking-[0.24em] text-bone-400 mt-1.5">
+                  {product.availability}
+                </div>
+              )}
             </div>
             <button
               type="button"
