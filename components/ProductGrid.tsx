@@ -1,8 +1,14 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Filter, SortDesc } from 'lucide-react';
-import { PRODUCTS, CATEGORIES, type CategoryId, type Product } from '@/lib/products';
+import { Filter, SortDesc, X } from 'lucide-react';
+import {
+  PRODUCTS,
+  CATEGORIES,
+  populatedCategories,
+  type CategoryId,
+  type Product,
+} from '@/lib/products';
 import ProductCard from './ProductCard';
 import { cn } from '@/lib/format';
 
@@ -34,6 +40,7 @@ export default function ProductGrid({
   const [category, setCategory] = useState<CategoryFilter>(initialCategory);
   const [stock, setStock] = useState<StockFilter>('all');
   const [sort, setSort] = useState<SortKey>('price_desc');
+  const categoriesShown = useMemo(() => populatedCategories(), []);
 
   const filtered = useMemo<Product[]>(() => {
     let list = [...PRODUCTS];
@@ -67,19 +74,23 @@ export default function ProductGrid({
     return list;
   }, [category, stock, sort, focusSlug]);
 
+  const activeCategory =
+    category === 'all' ? null : CATEGORIES.find((c) => c.id === category);
+  const hasActiveFilter = category !== 'all' || stock !== 'all';
+
   return (
     <div className="space-y-10">
-      <div className="surface flex flex-col lg:flex-row lg:items-center gap-px bg-bone-50/[0.06]">
-        <div className="flex flex-1 items-center gap-3 px-5 py-4 bg-ink-900">
+      <div className="surface">
+        <div className="px-5 py-4 border-b border-bone-50/[0.06] flex flex-wrap items-center gap-3">
           <Filter className="w-4 h-4 text-safety-500 flex-shrink-0" />
-          <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300">
-            Category
+          <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300 mr-2">
+            Division
           </span>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 flex-1">
             <FilterPill active={category === 'all'} onClick={() => setCategory('all')}>
               All
             </FilterPill>
-            {CATEGORIES.map((c) => (
+            {categoriesShown.map((c) => (
               <FilterPill
                 key={c.id}
                 active={category === c.id}
@@ -89,44 +100,61 @@ export default function ProductGrid({
               </FilterPill>
             ))}
           </div>
+          {hasActiveFilter && (
+            <button
+              type="button"
+              onClick={() => {
+                setCategory('all');
+                setStock('all');
+              }}
+              className="inline-flex items-center gap-1 font-display text-[0.7rem] uppercase tracking-[0.2em] font-semibold text-bone-300 hover:text-safety-500 transition-colors focus-ring"
+            >
+              <X className="w-3 h-3" />
+              Reset
+            </button>
+          )}
         </div>
 
-        <div className="flex flex-1 items-center gap-3 px-5 py-4 bg-ink-900">
-          <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300">
-            Status
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {(Object.keys(STOCK_LABEL) as StockFilter[]).map((s) => (
-              <FilterPill key={s} active={stock === s} onClick={() => setStock(s)}>
-                {STOCK_LABEL[s]}
-              </FilterPill>
-            ))}
+        <div className="px-5 py-4 flex flex-col lg:flex-row lg:items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3 flex-1">
+            <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300 mr-2">
+              Status
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {(Object.keys(STOCK_LABEL) as StockFilter[]).map((s) => (
+                <FilterPill key={s} active={stock === s} onClick={() => setStock(s)}>
+                  {STOCK_LABEL[s]}
+                </FilterPill>
+              ))}
+            </div>
           </div>
-        </div>
-
-        <div className="flex items-center gap-3 px-5 py-4 bg-ink-900">
-          <SortDesc className="w-4 h-4 text-safety-500" />
-          <label className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300">
-            Sort
-          </label>
-          <select
-            value={sort}
-            onChange={(e) => setSort(e.target.value as SortKey)}
-            className="bg-ink-800 border border-bone-50/10 text-bone-50 font-display text-[0.78rem] uppercase tracking-[0.18em] font-medium px-3 py-2 focus-ring"
-          >
-            {(Object.keys(SORT_LABEL) as SortKey[]).map((s) => (
-              <option key={s} value={s}>
-                {SORT_LABEL[s]}
-              </option>
-            ))}
-          </select>
+          <div className="flex items-center gap-3">
+            <SortDesc className="w-4 h-4 text-safety-500" />
+            <label className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300">
+              Sort
+            </label>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortKey)}
+              className="bg-ink-800 border border-bone-50/10 text-bone-50 font-display text-[0.78rem] uppercase tracking-[0.18em] font-medium px-3 py-2 focus-ring"
+            >
+              {(Object.keys(SORT_LABEL) as SortKey[]).map((s) => (
+                <option key={s} value={s}>
+                  {SORT_LABEL[s]}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-bone-300">
           Showing <span className="text-bone-50 font-bold">{filtered.length}</span> of{' '}
           {PRODUCTS.length} systems
+          {activeCategory && (
+            <span> · {activeCategory.shortName}</span>
+          )}
         </div>
         {focusSlug && (
           <div className="pill text-safety-500 border-safety-500/30">
@@ -138,7 +166,7 @@ export default function ProductGrid({
       {filtered.length === 0 ? (
         <div className="surface p-16 text-center">
           <div className="font-display text-2xl uppercase tracking-tight text-bone-50 mb-2">
-            Vault Empty For That Filter
+            Empty For That Filter
           </div>
           <p className="text-bone-300">Clear a filter to see more systems.</p>
         </div>

@@ -18,7 +18,9 @@ const ENV = [
 ];
 
 export default function LivePage() {
-  const featured = PRODUCTS.filter((p) => p.category === 'broadcast');
+  const featured = PRODUCTS.filter(
+    (p) => p.category === 'connectivity' || p.category === 'drones' || p.category === 'audio',
+  ).slice(0, 6);
 
   return (
     <>

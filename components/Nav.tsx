@@ -10,9 +10,10 @@ import SearchOverlay from './SearchOverlay';
 const NAV_LINKS = [
   { href: '/', label: 'Basecamp' },
   { href: '/products', label: 'The Vault' },
-  { href: '/products?category=power', label: 'Power' },
-  { href: '/products?category=broadcast', label: 'Broadcast' },
-  { href: '/products?category=precision', label: 'Precision' },
+  { href: '/products?category=cameras', label: 'Cameras' },
+  { href: '/products?category=drones', label: 'Drones' },
+  { href: '/products?category=fishing', label: 'Fishing' },
+  { href: '/products?category=hunting', label: 'Hunting' },
   { href: '/live', label: 'Live' },
 ];
 
