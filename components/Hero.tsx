@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronRight, Crosshair } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 
@@ -14,17 +15,43 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
   const reduced = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  useEffect(() => {
+    if (reduced && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [reduced]);
 
   return (
     <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-navy-950">
-      <div className="absolute inset-0">{!reduced && <TerrainScene />}</div>
+      {!reduced && !videoFailed && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/hero-intro.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          onError={() => setVideoFailed(true)}
+        />
+      )}
+      {(reduced || videoFailed) && (
+        <div className="absolute inset-0">
+          <TerrainScene />
+        </div>
+      )}
 
       <div
-        className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/85 to-navy-950/30"
+        className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/30"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 grid-bg-dark opacity-30 pointer-events-none"
+        className="absolute inset-0 grid-bg-dark opacity-20 pointer-events-none"
         aria-hidden="true"
       />
 

@@ -21,3 +21,7 @@ next-env.d.ts.bak
 .turbo
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+
+# Remotion subproject node_modules (rendered MP4 lives in public/)
+remotion/node_modules/
+remotion/.remotion/
