@@ -79,14 +79,17 @@
   .display-h1 {
     @apply font-display font-bold uppercase tracking-tight leading-[0.92];
     font-size: clamp(2.5rem, 7vw, 6.5rem);
+    text-wrap: balance;
   }
   .display-h2 {
     @apply font-display font-bold uppercase tracking-tight leading-[0.95];
     font-size: clamp(1.75rem, 4vw, 3.4rem);
+    text-wrap: balance;
   }
   .display-h3 {
     @apply font-display font-bold uppercase tracking-tight leading-tight;
     font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+    text-wrap: pretty;
   }
 
   .btn {

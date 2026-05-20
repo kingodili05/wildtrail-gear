@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { useCart, computeTotals } from '@/lib/store';
 import { cn } from '@/lib/format';
@@ -17,14 +18,37 @@ const NAV_LINKS = [
 ];
 
 export default function Nav() {
+  return (
+    <Suspense fallback={null}>
+      <NavInner />
+    </Suspense>
+  );
+}
+
+function NavInner() {
   const items = useCart((s) => s.items);
   const openCart = useCart((s) => s.openCart);
   const totals = computeTotals(items);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const activeCategory = searchParams.get('category');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const badgeRef = useRef<HTMLSpanElement>(null);
   const prevCount = useRef(totals.itemsCount);
+
+  function isActive(href: string): boolean {
+    if (href === '/') return pathname === '/';
+    if (href.startsWith('/products?category=')) {
+      const cat = href.split('=')[1];
+      return pathname === '/products' && activeCategory === cat;
+    }
+    if (href === '/products') {
+      return pathname === '/products' && !activeCategory;
+    }
+    return pathname === href;
+  }
 
   useEffect(() => {
     if (totals.itemsCount > prevCount.current && badgeRef.current) {
@@ -88,20 +112,34 @@ export default function Nav() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
-            {NAV_LINKS.map((l) => (
-              <Link
-                key={l.href + l.label}
-                href={l.href}
-                className={cn(
-                  'px-3 py-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-medium transition-colors focus-ring',
-                  onDark
-                    ? 'text-ivory-200 hover:text-ivory-50'
-                    : 'text-graphite-700 hover:text-navy-900',
-                )}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((l) => {
+              const active = isActive(l.href);
+              return (
+                <Link
+                  key={l.href + l.label}
+                  href={l.href}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'relative px-3 py-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-medium transition-colors focus-ring',
+                    active
+                      ? onDark
+                        ? 'text-ivory-50'
+                        : 'text-navy-900'
+                      : onDark
+                      ? 'text-ivory-200 hover:text-ivory-50'
+                      : 'text-graphite-700 hover:text-navy-900',
+                  )}
+                >
+                  {l.label}
+                  {active && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute left-3 right-3 -bottom-px h-px bg-red-500"
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-2">

@@ -38,7 +38,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative py-24 md:py-32 bg-navy-900 text-ivory-50 border-t border-ivory-50/[0.06]">
+      <section className="relative py-24 md:py-32 bg-navy-950 text-ivory-50 border-t border-ivory-50/[0.06]">
         <div className="absolute inset-0 grid-bg-dark opacity-30 pointer-events-none" />
         <div className="container-wt relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -87,7 +87,7 @@ export default function HomePage() {
                   desc: 'Door-to-door insurance up to $25K. GPS-locked transit.',
                 },
               ].map((s) => (
-                <li key={s.step} className="grid grid-cols-[80px,1fr] gap-6 bg-navy-900 px-6 py-5">
+                <li key={s.step} className="grid grid-cols-[80px,1fr] gap-6 bg-navy-950 px-6 py-5">
                   <span className="font-display font-bold text-3xl text-red-500 tabular-nums">
                     {s.step}
                   </span>

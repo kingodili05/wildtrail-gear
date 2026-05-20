@@ -53,8 +53,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${GeistSans.variable} ${GeistMono.variable} ${rajdhani.variable}`}
     >
       <body className="min-h-[100dvh] flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-navy-950 focus:text-ivory-50 focus:px-4 focus:py-2 focus:border focus:border-red-500 focus:font-display focus:uppercase focus:tracking-[0.18em] focus:text-sm"
+        >
+          Skip to content
+        </a>
         <Nav />
-        <main className="flex-1 pt-20">{children}</main>
+        <main id="main-content" className="flex-1 pt-20">
+          {children}
+        </main>
         <Ticker />
         <Footer />
         <CartDrawer />

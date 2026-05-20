@@ -118,7 +118,7 @@ export default function Hero() {
           >
             <Stat label="Operators Equipped" value="412" sub="2024-2026" />
             <Stat label="Continuous Field Hours" value="2.8M" sub="Logged uptime" />
-            <Stat label="Orders Shipped" value="9,471" sub="Worldwide" />
+            <Stat label="Orders Shipped" value="9,471" sub="Worldwide insured" />
           </motion.div>
         </div>
       </div>

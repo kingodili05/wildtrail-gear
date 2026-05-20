@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { ShieldCheck, Truck, PackageCheck, Headphones } from 'lucide-react';
 
-const COLS = [
+type FooterLink = { label: string; href: string; soon?: boolean };
+
+const COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Outfit',
     links: [
@@ -14,18 +16,18 @@ const COLS = [
   {
     title: 'Operator',
     links: [
-      { label: 'Field Reports', href: '#' },
-      { label: 'Loadout Library', href: '#' },
-      { label: 'Operator Login', href: '#' },
+      { label: 'Field Reports', href: '#', soon: true },
+      { label: 'Loadout Library', href: '#', soon: true },
+      { label: 'Operator Login', href: '#', soon: true },
     ],
   },
   {
     title: 'Logistics',
     links: [
-      { label: 'Expedition Shipping', href: '#' },
-      { label: 'Returns & Damage', href: '#' },
-      { label: 'Warranty Registry', href: '#' },
-      { label: 'Field Support 24/7', href: '#' },
+      { label: 'Expedition Shipping', href: '#', soon: true },
+      { label: 'Returns & Damage', href: '#', soon: true },
+      { label: 'Warranty Registry', href: '#', soon: true },
+      { label: 'Field Support 24/7', href: '#', soon: true },
     ],
   },
 ];
@@ -78,16 +80,30 @@ export default function Footer() {
               {col.title}
             </div>
             <ul className="space-y-3">
-              {col.links.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="text-bone-300 hover:text-safety-500 transition-colors"
+              {col.links.map((l) =>
+                l.soon ? (
+                  <li
+                    key={l.label}
+                    className="text-bone-400/60 cursor-not-allowed inline-flex items-center gap-2"
+                    aria-disabled="true"
+                    title="Coming soon"
                   >
                     {l.label}
-                  </Link>
-                </li>
-              ))}
+                    <span className="font-mono text-[0.55rem] uppercase tracking-[0.24em] text-bone-400/40 border border-bone-400/20 px-1 py-px">
+                      Soon
+                    </span>
+                  </li>
+                ) : (
+                  <li key={l.label}>
+                    <Link
+                      href={l.href}
+                      className="text-bone-300 hover:text-safety-500 transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
         ))}
