@@ -110,16 +110,10 @@ export default function ProductCard({
                   </div>
                 )}
               </div>
-              {product.availability && (
-                <div className="font-mono text-[0.6rem] uppercase tracking-[0.24em] text-graphite-500 mt-1.5">
-                  {product.availability}
-                </div>
-              )}
             </div>
             <button
               type="button"
               onClick={() => add(product.id, 1)}
-              disabled={product.stock === 'preorder' && product.unitsLeft === 0}
               className="btn btn-primary btn-sm"
             >
               <Plus className="w-4 h-4" />
