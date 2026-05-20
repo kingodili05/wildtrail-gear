@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Menu, Search, ShoppingBag, Radio, X } from 'lucide-react';
-import { useCart, useLive, computeTotals } from '@/lib/store';
+import { Menu, Search, ShoppingBag, X } from 'lucide-react';
+import { useCart, computeTotals } from '@/lib/store';
 import { cn } from '@/lib/format';
 import SearchOverlay from './SearchOverlay';
 
@@ -14,14 +14,12 @@ const NAV_LINKS = [
   { href: '/products?category=drones', label: 'Drones' },
   { href: '/products?category=fishing', label: 'Fishing' },
   { href: '/products?category=hunting', label: 'Hunting' },
-  { href: '/live', label: 'Live' },
 ];
 
 export default function Nav() {
   const items = useCart((s) => s.items);
   const openCart = useCart((s) => s.openCart);
   const totals = computeTotals(items);
-  const isLive = useLive((s) => s.isLive);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -79,30 +77,6 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/live"
-              className={cn(
-                'hidden sm:inline-flex items-center gap-2 px-3 py-2 border font-display text-[0.7rem] uppercase tracking-[0.22em] font-semibold transition-colors focus-ring',
-                isLive
-                  ? 'border-safety-500 text-safety-500 hover:bg-safety-500/10'
-                  : 'border-bone-50/15 text-bone-300',
-              )}
-              aria-label={isLive ? 'Live stream active' : 'Live stream offline'}
-            >
-              <Radio className="w-3.5 h-3.5" />
-              {isLive ? (
-                <>
-                  <span className="relative flex w-2 h-2">
-                    <span className="absolute inset-0 rounded-full bg-safety-500 animate-pulse" />
-                    <span className="relative rounded-full w-2 h-2 bg-safety-500" />
-                  </span>
-                  Live
-                </>
-              ) : (
-                'Offline'
-              )}
-            </Link>
-
             <button
               type="button"
               onClick={() => setSearchOpen(true)}

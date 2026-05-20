@@ -1,13 +1,13 @@
 # WildTrail Gear
 
-Luxury Tactical Expedition Outfitter — a Next.js 15 / React 19 e-commerce surface for hyper-premium outdoor engineering, off-grid power, broadcast-grade field streaming, and precision tools. Built for the WANNYMEMORY Vault ecosystem.
+Premium creator and outdoor gear — a Next.js 15 / React 19 e-commerce surface for broadcast cameras, drones, off-grid power, fishing electronics, and field audio.
 
 ## Stack
 
 - **Next.js 15** (App Router) + **React 19**
 - **TypeScript** strict mode
 - **Tailwind CSS 3.4** — dark-first, custom tactical palette
-- **Zustand 5** — cart state, persisted to localStorage; live-stream state ephemeral
+- **Zustand 5** — cart state, persisted to localStorage
 - **react-three-fiber + drei + three** — 3D hero topographic mesh
 - **framer-motion** — scroll-reveal + stagger
 - **lucide-react** — interface iconography
@@ -15,11 +15,10 @@ Luxury Tactical Expedition Outfitter — a Next.js 15 / React 19 e-commerce surf
 
 ## 3D design choices
 
-Per `DESIGN.md` "3D used like spice, not sauce." Three 3D moments:
+Per `DESIGN.md` "3D used like spice, not sauce." Two 3D moments:
 
 1. **Hero** — `components/TerrainScene.tsx`. Animated wireframe topographic mesh + safety-orange dust particle field + slow camera drift. Disabled when `prefers-reduced-motion: reduce`. Loaded via `next/dynamic` with `ssr: false` so the R3F bundle stays out of the SSR critical path.
 2. **TiltCard** — `components/TiltCard.tsx`. CSS-perspective 3D tilt on pointer move with radial glare. Used on category tiles and product cards. Skips touch input.
-3. **Radar** — `components/Radar.tsx`. SVG-based animated radar sweep with intensity-tracked ping markers, sits in the live-stream sidebar. Reads as operator console.
 
 `Reveal` and `Stagger` (`components/Reveal.tsx`) drive framer-motion scroll-reveals across the site.
 
@@ -40,26 +39,26 @@ Per `DESIGN.md` "3D used like spice, not sauce." Three 3D moments:
 wildtrail-gear/
 ├── app/
 │   ├── layout.tsx          # Root layout, fonts, nav/footer/cart drawer
-│   ├── page.tsx            # Basecamp Hub — hero, categories, live, flagship grid, operator promise
+│   ├── page.tsx            # Home — hero, categories, flagship grid, operator promise
 │   ├── globals.css         # Tailwind base + component classes
-│   ├── products/
-│   │   └── page.tsx        # The Vault Inventory — filters + sort
-│   └── live/
-│       └── page.tsx        # Live stream page + telemetry
+│   └── products/
+│       └── page.tsx        # The Vault Inventory — filters + sort
 ├── components/
-│   ├── Nav.tsx             # Sticky nav, cart badge, LIVE pill, search trigger, mobile sheet
-│   ├── Hero.tsx            # Fullscreen landscape, coordinates, animated stats
-│   ├── CategoryGrid.tsx    # Three loadout tiles linking to filtered Vault
-│   ├── LiveStreamModule.tsx# Interactive feed surface w/ telemetry sidebar
-│   ├── ProductCard.tsx     # Zoom interaction, SKU, secure-cart entry
+│   ├── Nav.tsx             # Sticky nav, cart badge, search trigger, mobile sheet
+│   ├── Hero.tsx            # Fullscreen 3D terrain hero
+│   ├── TerrainScene.tsx    # R3F topographic wireframe + dust particles
+│   ├── CategoryGrid.tsx    # Three pillar tiles + full category index
+│   ├── ProductCard.tsx     # Tilt + zoom interaction, SKU + MFR badge, secure-cart entry
 │   ├── ProductGrid.tsx     # Category + status filters, sort presets
 │   ├── CartDrawer.tsx      # Slide-out drawer, totals, tax, shipping, protection
 │   ├── SearchOverlay.tsx   # Cmd-K-style search overlay
+│   ├── TiltCard.tsx        # CSS-perspective 3D tilt wrapper
+│   ├── Reveal.tsx          # Framer-motion scroll reveal primitives
 │   ├── Footer.tsx          # Trust strip + 3-col link nav
 │   └── Ticker.tsx          # Marquee safety strip
 └── lib/
-    ├── products.ts         # 7 hardcoded SKUs, full specs, stock posture
-    ├── store.ts            # Zustand cart + live stores, totals math
+    ├── products.ts         # 46 SKUs across 17 categories
+    ├── store.ts            # Zustand cart store + totals math
     └── format.ts           # Currency, compact number, cn helper
 ```
 
@@ -89,15 +88,11 @@ npm run lint       # Next.js lint
 
 ## Inventory
 
-Seven SKUs, ranging from $1,250 to $8,500. Hardcoded in `lib/products.ts`. Each carries highlights, spec table, stock posture, and serialized SKU.
-
-## Live stream
-
-`useLive` store holds `{ isLive, viewers, startedAt }`. The on-screen module computes elapsed time live, with telemetry overlays. The `LIVE` pill in the nav reflects this state across the site.
+46 SKUs across 17 categories. Cameras division spans $2,600 → $99,999 with 22 active listings including the supplied Adorama broadcast camcorder catalog. Hardcoded in `lib/products.ts`. Each carries highlights, spec table, stock posture, MFR code, and serialized SKU.
 
 ## Notes
 
-- All product imagery uses Unsplash with `auto=format&fit=crop&w=1600&q=80`. Swap to internal CDN for production.
+- Product imagery uses operator-supplied Imgur URLs for broadcast cameras and Unsplash placeholders elsewhere. Swap to internal CDN for production.
 - High-Ticket Protection price/threshold sits in `lib/store.ts` constants near the top of the function.
 - Zustand state persists under `wildtrail-cart-v1` — bump the version when shipping a schema change.
-- Accessibility: all interactive surfaces carry visible `focus-ring`, modal traps are wired with Escape close, drawer respects body scroll lock.
+- Accessibility: all interactive surfaces carry visible `focus-ring`, modal/drawer trap with Escape, body scroll lock.

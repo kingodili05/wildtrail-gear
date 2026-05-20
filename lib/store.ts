@@ -140,19 +140,3 @@ export function computeTotals(items: CartItem[]): CartTotals {
   };
 }
 
-type LiveState = {
-  isLive: boolean;
-  viewers: number;
-  startedAt: number | null;
-  toggle: () => void;
-  setLive: (live: boolean) => void;
-};
-
-export const useLive = create<LiveState>((set) => ({
-  isLive: true,
-  viewers: 1487,
-  startedAt: Date.now() - 1000 * 60 * 47,
-  toggle: () =>
-    set((s) => ({ isLive: !s.isLive, startedAt: !s.isLive ? Date.now() : null })),
-  setLive: (live) => set({ isLive: live, startedAt: live ? Date.now() : null }),
-}));

@@ -1,6 +1,5 @@
 import Hero from '@/components/Hero';
 import CategoryGrid from '@/components/CategoryGrid';
-import LiveStreamModule from '@/components/LiveStreamModule';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 import { PRODUCTS } from '@/lib/products';
@@ -13,7 +12,6 @@ export default function HomePage() {
     <>
       <Hero />
       <CategoryGrid />
-      <LiveStreamModule />
 
       <section className="py-24 md:py-32 bg-ink-950">
         <div className="container-wt">
@@ -60,8 +58,8 @@ export default function HomePage() {
                 <Link href="/products" className="btn btn-primary btn-lg">
                   Begin Outfitting
                 </Link>
-                <Link href="/live" className="btn btn-outline btn-lg">
-                  Watch Field Trials
+                <Link href="/products?category=cameras" className="btn btn-outline btn-lg">
+                  Browse Cameras
                 </Link>
               </div>
             </div>

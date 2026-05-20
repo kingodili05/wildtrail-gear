@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { ChevronRight, Radio, Crosshair } from 'lucide-react';
+import { ChevronRight, Crosshair } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const TerrainScene = dynamic(() => import('./TerrainScene'), {
@@ -78,9 +78,8 @@ export default function Hero() {
               Enter The Vault
               <ChevronRight className="w-4 h-4" />
             </Link>
-            <Link href="/live" className="btn btn-outline btn-lg">
-              <Radio className="w-4 h-4" />
-              Watch Live Now
+            <Link href="/products?category=cameras" className="btn btn-outline btn-lg">
+              Browse Cameras
             </Link>
           </motion.div>
 

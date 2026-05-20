@@ -9,10 +9,9 @@
 - **Brand/press partners** — agencies, retailers, reviewers evaluating whether WildTrail is the real article or AI-generated SaaS slop.
 
 ## Product purpose
-1. Sell seven hyper-premium SKUs at high average order value (target AOV $4,200).
+1. Sell premium creator and outdoor gear at high average order value (target AOV $4,200).
 2. Telegraph engineering-grade credibility on first scroll.
-3. Host a continuous live operator broadcast that doubles as social proof.
-4. Convert without ever feeling like a generic Shopify catalog.
+3. Convert without ever feeling like a generic Shopify catalog.
 
 ## Tone / voice
 Three concrete words: **engineered, deliberate, weather-worn**.

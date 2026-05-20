@@ -22,19 +22,20 @@ export const metadata: Metadata = {
     template: '%s · WildTrail Gear',
   },
   description:
-    'Luxury tactical expedition outfitter. Industrial power, broadcast-grade field streaming, and precision tools for operators who run remote base camps.',
+    'Premium creator and outdoor gear store — broadcast cameras, drones, off-grid power, fishing electronics, and field audio for serious operators.',
   keywords: [
-    'tactical gear',
+    'broadcast camera',
+    'cinema camera',
+    'professional drone',
+    'fish finder',
+    'off-grid power',
+    'creator gear',
     'expedition equipment',
-    'off-grid generator',
-    'bonded streaming',
-    'thermal drone',
-    'precision archery',
   ],
   openGraph: {
-    title: 'WildTrail Gear — Luxury Tactical Expedition Outfitter',
+    title: 'WildTrail Gear — Premium Creator & Outdoor Gear',
     description:
-      'Hand-built power, broadcast, and precision systems for the operators who pitch camp where the maps end.',
+      'Broadcast cameras, drones, off-grid power, fishing electronics, and field audio for serious operators.',
     type: 'website',
   },
 };

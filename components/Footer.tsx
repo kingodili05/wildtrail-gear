@@ -1,20 +1,19 @@
 import Link from 'next/link';
-import { ShieldCheck, Truck, Radio, Headphones } from 'lucide-react';
+import { ShieldCheck, Truck, PackageCheck, Headphones } from 'lucide-react';
 
 const COLS = [
   {
     title: 'Outfit',
     links: [
       { label: 'The Vault', href: '/products' },
-      { label: 'Industrial Power', href: '/products?category=power' },
-      { label: 'Field Broadcast', href: '/products?category=broadcast' },
-      { label: 'Precision Tools', href: '/products?category=precision' },
+      { label: 'Cameras', href: '/products?category=cameras' },
+      { label: 'Drones', href: '/products?category=drones' },
+      { label: 'Batteries & Power', href: '/products?category=power' },
     ],
   },
   {
     title: 'Operator',
     links: [
-      { label: 'Live Now', href: '/live' },
       { label: 'Field Reports', href: '#' },
       { label: 'Loadout Library', href: '#' },
       { label: 'Operator Login', href: '#' },
@@ -34,8 +33,8 @@ const COLS = [
 const TRUST = [
   { icon: ShieldCheck, label: 'AES-256 Checkout', sub: 'Hardware-isolated' },
   { icon: Truck, label: 'Expedition Logistics', sub: 'Insured to $25K' },
-  { icon: Radio, label: 'Encrypted Live Feed', sub: 'AV1 / bonded uplink' },
-  { icon: Headphones, label: 'Operator Support', sub: '24/7 sat phone line' },
+  { icon: PackageCheck, label: 'Authorized Dealer', sub: 'OEM-warranty stock' },
+  { icon: Headphones, label: 'Operator Support', sub: '24/7 phone line' },
 ];
 
 export default function Footer() {
@@ -68,13 +67,10 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-bone-300 leading-relaxed max-w-[40ch]">
-            Hand-built power, broadcast, and precision systems for operators who pitch
-            camp where the maps end. Every system field-tested. Every order tracked.
+            Premium creator and outdoor gear — cameras, drones, broadcast and
+            off-grid systems for serious operators. Every order serialized.
+            Every shipment tracked.
           </p>
-          <div className="mt-6 pill text-safety-500 border-safety-500/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-safety-500 animate-pulse" />
-            WANNYMEMORY Vault · System Online
-          </div>
         </div>
 
         {COLS.map((col) => (
@@ -99,7 +95,7 @@ export default function Footer() {
       </div>
 
       <div className="container-wt border-t border-bone-50/[0.06] py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-bone-400 font-mono uppercase tracking-[0.22em]">
-        <div>© 2026 WildTrail Gear · WANNYMEMORY Vault Ecosystem</div>
+        <div>© 2026 WildTrail Gear · All rights reserved</div>
         <div className="flex gap-6">
           <Link href="#" className="hover:text-bone-50 transition-colors">
             Privacy

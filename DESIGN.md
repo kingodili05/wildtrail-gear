@@ -39,15 +39,13 @@ Scale: `clamp()` everywhere. ≥1.3 step ratio. Light text on dark gets 1.65–1
 - No nested cards. No `border-radius` above 4px on functional UI. Pills only get `rounded-none` here — sharp corners signal engineered.
 
 ## 3D treatment — used like spice
-Three planned 3D moments. Each must justify its weight (target <80kb gzipped for R3F bundle).
+Two planned 3D moments. Each must justify its weight (target <80kb gzipped for R3F bundle).
 
 1. **Hero canvas — Topographic terrain mesh.** R3F scene. Animated wireframe contour grid with slow camera drift and dust particle field. Sets the "operator at altitude" tone. Renders behind hero copy with reduced opacity. Disabled when `prefers-reduced-motion: reduce`.
 
-2. **Card tilt on pointer move.** Category tiles and flagship product cards get a max-±8° tilt with 1.04 scale on pointer enter. Pure CSS perspective + transform3d driven by JS pointer events. No library overhead.
+2. **Card tilt on pointer move.** Category tiles and product cards get a max-±8° tilt with 1.04 scale on pointer enter. Pure CSS perspective + transform3d driven by JS pointer events. No library overhead.
 
-3. **Live radar sweep.** SVG-based animated radar arc with ping markers, fixed in the live module. Reads as "operator console," not as ornament.
-
-4. **Bonus — scroll-driven parallax.** Hero image translates Y at 0.25× scroll. Stops at viewport boundary. CSS-only via `transform: translateY(...)` with rAF-throttled scroll listener.
+3. **Bonus — scroll-driven parallax.** Hero image translates Y at 0.25× scroll. Stops at viewport boundary. CSS-only via `transform: translateY(...)` with rAF-throttled scroll listener.
 
 ## Motion
 - Easing: `cubic-bezier(0.22, 1, 0.36, 1)` everywhere. No bounce. No elastic.
