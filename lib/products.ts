@@ -52,98 +52,98 @@ export const CATEGORIES: Category[] = [
     name: 'Cameras',
     shortName: 'Cameras',
     description:
-      'Cinema bodies, mirrorless hybrids, and broadcast-grade sensors selected for narrative outdoor production.',
+      'Cinema bodies, mirrorless hybrids, and broadcast cameras for outdoor shoots.',
   },
   {
     id: 'action-cameras',
     name: 'Action Cameras',
     shortName: 'Action Cameras',
     description:
-      'Rugged POV bodies built for water, mud, and high-impact mounts. Spare batteries and rigs included.',
+      'POV bodies for water, mud, and high-impact mounts. Spare batteries and rigs included.',
   },
   {
     id: 'drones',
     name: 'Drones',
     shortName: 'Drones',
     description:
-      'Compact travel drones to enterprise-grade thermal tracking platforms for follow-me broadcast work.',
+      'Travel drones through thermal tracking platforms. Follow-me telemetry for broadcast.',
   },
   {
     id: 'fishing',
     name: 'Fishing Gear',
     shortName: 'Fishing',
     description:
-      'Forward-looking sonar, livescope rigs, and marine electronics that change how the water is read.',
+      'Forward-looking sonar, livescope rigs, and marine electronics.',
   },
   {
     id: 'bowfishing',
     name: 'Bowfishing',
     shortName: 'Bowfishing',
     description:
-      'Reel-mounted bows, fiberglass arrows, and lighted nocks engineered for shallow-water rough fish.',
+      'Reel-mounted bows, fiberglass arrows, lighted nocks. Built for shallow-water rough fish.',
   },
   {
     id: 'hunting',
     name: 'Hunting',
     shortName: 'Hunting',
     description:
-      'Compound bows, optics, and field tools selected for serious deer and turkey work.',
+      'Compound bows, optics, and field tools for deer and turkey work.',
   },
   {
     id: 'camping',
     name: 'Camping',
     shortName: 'Camping',
     description:
-      'Ultralight shelter, sleep, and seat systems for multi-day expedition base-camping.',
+      'Ultralight shelter, sleep, and seat systems for multi-day basecamps.',
   },
   {
     id: 'audio',
     name: 'Creator Audio',
     shortName: 'Creator Audio',
     description:
-      'Lavalier kits, broadcast mixers, and wireless capture systems that separate amateur from professional.',
+      'Lavalier kits, broadcast mixers, and wireless capture.',
   },
   {
     id: 'power',
     name: 'Batteries & Power',
     shortName: 'Batteries & Power',
     description:
-      'Industrial inverters, lithium power stations, and folding solar harvest arrays for off-grid base camps.',
+      'Industrial inverters, lithium power stations, and folding solar arrays for off-grid camps.',
   },
   {
     id: 'connectivity',
     name: 'Internet & Field Connectivity',
     shortName: 'Connectivity',
     description:
-      'Bonded cellular routers, satellite kits, and broadcast uplinks for continuous 4K from anywhere.',
+      'Bonded cellular routers, satellite kits, and broadcast uplinks. 4K stays up past cell range.',
   },
   {
     id: 'kayaks',
     name: 'Kayaks & Boats',
     shortName: 'Kayaks & Boats',
     description:
-      'Sit-on-top fishing kayaks and pedal-drive platforms built for skinny water and big catches.',
+      'Sit-on-top fishing kayaks and pedal-drive platforms for skinny water.',
   },
   {
     id: 'storage',
     name: 'Storage & SSDs',
     shortName: 'Storage & SSDs',
     description:
-      'Portable SSDs, ruggedized field drives, and offload solutions for broadcast-grade workflows.',
+      'Portable SSDs and ruggedized field drives for offloading shoot days.',
   },
   {
     id: 'mounts',
     name: 'Tripods & Mounts',
     shortName: 'Tripods & Mounts',
     description:
-      'Carbon-fiber tripods, fluid heads, and clamp mounts engineered for broadcast camera weights.',
+      'Carbon-fiber tripods, fluid heads, and clamp mounts rated for broadcast weights.',
   },
   {
     id: 'knives',
     name: 'Knives & Tools',
     shortName: 'Knives & Tools',
     description:
-      'Hand-forged blades, field-dressing kits, and titanium-cased game tools for committed operators.',
+      'Hand-forged blades, field-dressing kits, and titanium-cased game tools.',
   },
   {
     id: 'clothing',
@@ -157,14 +157,14 @@ export const CATEGORIES: Category[] = [
     name: 'Lighting',
     shortName: 'Lighting',
     description:
-      'Field-grade LED panels, lanterns, and headlamps for continuous-shoot scenarios.',
+      'Field LED panels, lanterns, and headlamps for night shoots and basecamps.',
   },
   {
     id: 'gps',
     name: 'GPS & Navigation',
     shortName: 'GPS & Navigation',
     description:
-      'Satellite communicators, handheld GPS units, and inReach hardware for off-grid backup comms.',
+      'Satellite communicators, handheld GPS units, and inReach hardware for off-grid comms.',
   },
 ];
 

@@ -43,7 +43,7 @@ function Login() {
             <div className="eyebrow justify-center">Restricted</div>
             <h1 className="display-h2 text-navy-900">Admin Sign-In</h1>
             <p className="text-sm text-graphite-500">
-              Enter the admin password to manage payment settings.
+              Enter the password to manage payment settings.
             </p>
           </div>
           <form onSubmit={submit} className="space-y-3">
@@ -118,10 +118,11 @@ function Dashboard() {
             <div className="eyebrow mb-3">Admin</div>
             <h1 className="display-h2 text-ivory-50">Payment Settings</h1>
             <p className="text-ivory-200/80 mt-3 max-w-[60ch] text-sm leading-relaxed">
-              Edit the bank wire and cashier&apos;s-check instructions that customers see
-              at checkout. Changes save to this browser immediately. For cross-device
-              deployment to all visitors, click <em>Copy Config</em> and commit the
-              snippet to <code className="font-mono text-ivory-50/80">lib/payment-settings.ts</code>.
+              Edit the wire and check details customers see at checkout. Saves to
+              this browser straight away. To push the change to every visitor,
+              click <em>Copy Config</em>, paste into{' '}
+              <code className="font-mono text-ivory-50/80">lib/payment-settings.ts</code>,
+              and commit.
             </p>
           </div>
           <div className="flex gap-3">

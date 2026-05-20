@@ -59,8 +59,8 @@ function SuccessInner() {
             Order <span className="text-red-500">Confirmed</span>
           </h1>
           <p className="text-graphite-500 text-lg leading-relaxed max-w-[52ch] mx-auto">
-            Thanks. Your units are reserved. Send payment using the instructions below
-            so we can ship your gear. A copy of these details has been emailed to you.
+            Your units are reserved. Send payment using the instructions below.
+            A copy is in your inbox.
           </p>
           <div className="inline-block bg-navy-950 text-ivory-50 px-6 py-4">
             <div className="font-display text-[0.7rem] uppercase tracking-[0.3em] text-ivory-200/70 mb-1">
@@ -182,7 +182,7 @@ function SupportBlock({ settings }: { settings: PaymentSettings }) {
       <div>
         <div className="eyebrow text-red-500 mb-1">Need Help?</div>
         <div className="font-display text-lg uppercase tracking-tight text-ivory-50">
-          We&apos;ll match your payment to this order ID.
+          Use this order ID as your wire memo or check note.
         </div>
       </div>
       <div className="flex flex-wrap gap-4 text-sm">

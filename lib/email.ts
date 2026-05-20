@@ -111,8 +111,8 @@ export function buildOrderEmailHtml(input: OrderEmailInput): string {
       Order Confirmed
     </h1>
     <p style="font-family:sans-serif;color:#67675E;text-align:center;margin:0 0 24px;font-size:14px;line-height:1.6">
-      ${escape(name)}, thanks for your order. Send payment using the details below so we
-      can ship your gear.
+      ${escape(name)}, your order is reserved. Send payment using the details below.
+      We ship within 2 business days of the payment clearing.
     </p>
 
     <div style="background:#050A1F;color:#FAFAF7;text-align:center;padding:16px;margin:24px 0;font-family:sans-serif">

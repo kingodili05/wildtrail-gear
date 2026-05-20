@@ -37,8 +37,8 @@ export default async function ProductsPage({
             Every System. <span className="text-red-500">Sorted By Power.</span>
           </h1>
           <p className="text-ivory-200 mt-6 max-w-[60ch] text-lg leading-relaxed">
-            Highest-value systems first. Filter by division, sort by price, or by stock
-            posture. Every line item is serialized, logged, and field-validated.
+            Highest-value first. Filter by division, sort by price, or by stock.
+            Each line item is serialized and field-tested.
           </p>
         </div>
       </section>

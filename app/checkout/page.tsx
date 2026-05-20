@@ -234,8 +234,8 @@ export default function CheckoutPage() {
               <div className="p-8 md:p-10 space-y-6">
                 <h2 className="display-h2 text-navy-900">Payment Method</h2>
                 <p className="text-graphite-500 text-sm leading-relaxed max-w-[60ch]">
-                  Choose how to pay. Bank wire or mailing details will be delivered on the
-                  order confirmation screen and emailed to you.
+                  Pick a method. We&apos;ll show the wire or mailing details on the next
+                  screen and email them to you.
                 </p>
 
                 {methodOptions.length === 0 ? (
@@ -256,8 +256,8 @@ export default function CheckoutPage() {
                 <div className="bg-ivory-100 border border-navy-900/[0.08] px-4 py-3 text-xs text-graphite-500 flex items-start gap-2">
                   <ShieldCheck className="w-4 h-4 text-red-600 flex-shrink-0 mt-px" />
                   <span>
-                    Your order will be reserved on submission. Payment details
-                    arrive on the next screen and via email.
+                    We reserve your units the moment you submit. Payment details land
+                    on the next screen and in your inbox.
                   </span>
                 </div>
 
@@ -291,7 +291,7 @@ export default function CheckoutPage() {
                 <div className="inline-block w-12 h-12 border-2 border-navy-900/15 border-t-red-600 rounded-full animate-spin" />
                 <h2 className="display-h2 text-navy-900">Placing Order…</h2>
                 <p className="text-graphite-500 max-w-[40ch] mx-auto">
-                  Reserving units and preparing your payment instructions.
+                  Reserving your units.
                 </p>
               </div>
             )}

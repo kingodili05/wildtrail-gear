@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: '%s · WildTrail Gear',
   },
   description:
-    'Premium creator and outdoor gear store — broadcast cameras, drones, off-grid power, fishing electronics, and field audio for serious operators.',
+    'Broadcast cameras, drones, off-grid power, fishing electronics, and field audio. Every order serialized and field-tested before it ships.',
   keywords: [
     'broadcast camera',
     'cinema camera',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'WildTrail Gear — Premium Creator & Outdoor Gear',
     description:
-      'Broadcast cameras, drones, off-grid power, fishing electronics, and field audio for serious operators.',
+      'Cameras, drones, off-grid power, fishing electronics, and field audio. Every order serialized.',
     type: 'website',
   },
 };

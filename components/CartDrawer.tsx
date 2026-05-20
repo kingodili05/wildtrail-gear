@@ -250,7 +250,7 @@ function EmptyState() {
         The Cart Is Empty
       </h3>
       <p className="text-graphite-500 text-sm max-w-[36ch] mx-auto">
-        Choose from the catalog to begin outfitting your next expedition.
+        Pick something from the catalog.
       </p>
     </div>
   );

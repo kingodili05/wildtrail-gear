@@ -20,8 +20,8 @@ export default function HomePage() {
               <div className="eyebrow mb-4">Flagship Systems</div>
               <h2 className="display-h2 text-navy-900">The Top Of The Catalog</h2>
               <p className="text-graphite-500 mt-4 max-w-[60ch]">
-                The highest-value systems on the platform. Hand-tuned, individually
-                serialized, and field-validated before shipment.
+                Highest-value systems first. We serialize and field-test each unit
+                before it ships.
               </p>
             </div>
             <Link href="/products" className="btn btn-outline-dark">
@@ -50,9 +50,9 @@ export default function HomePage() {
                 <span className="text-red-500">Documented.</span>
               </h2>
               <p className="text-ivory-200 mt-5 max-w-[52ch] leading-relaxed">
-                Every system on this site has been deployed in the field — not in a lab —
-                before listing. Telemetry from each deployment is logged and reviewed.
-                Every order ships with the operator log of the unit you receive.
+                We test every system in the field before listing it. Each unit carries
+                its own telemetry log. The log of the exact unit you receive ships in
+                the box.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/products" className="btn btn-primary btn-lg">
@@ -68,23 +68,23 @@ export default function HomePage() {
               {[
                 {
                   step: '01',
-                  title: 'Field Acquisition',
-                  desc: 'Operators select kit and serial-locked uplinks reserve units.',
+                  title: 'Reserve A Unit',
+                  desc: 'You pick the kit. We reserve a serialized unit against your order.',
                 },
                 {
                   step: '02',
                   title: 'Bench + Field Trial',
-                  desc: 'Each unit passes a 96-hour bench burn and a 7-day field deployment.',
+                  desc: 'Every unit runs a 96-hour bench burn, then a 7-day field deployment.',
                 },
                 {
                   step: '03',
-                  title: 'Cryptographic Seal',
-                  desc: 'Tamper-evident seal applied, paired to your operator key.',
+                  title: 'Sealed To You',
+                  desc: 'We apply a tamper-evident seal paired to your operator key.',
                 },
                 {
                   step: '04',
-                  title: 'Insured Expedition Ship',
-                  desc: 'Door-to-door insurance up to $25K, GPS-locked transit.',
+                  title: 'Insured Shipment',
+                  desc: 'Door-to-door insurance up to $25K. GPS-locked transit.',
                 },
               ].map((s) => (
                 <li key={s.step} className="grid grid-cols-[80px,1fr] gap-6 bg-navy-900 px-6 py-5">

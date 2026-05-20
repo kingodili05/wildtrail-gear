@@ -67,9 +67,8 @@ export default function Footer() {
             </span>
           </Link>
           <p className="text-bone-300 leading-relaxed max-w-[40ch]">
-            Premium creator and outdoor gear — cameras, drones, broadcast and
-            off-grid systems for serious operators. Every order serialized.
-            Every shipment tracked.
+            Cameras, drones, broadcast rigs, and off-grid power. Every order
+            serialized. Every shipment tracked.
           </p>
         </div>
 

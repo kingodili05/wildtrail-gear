@@ -92,7 +92,7 @@ export default function Hero() {
             transition={{ duration: 0.7, ease, delay: 0.55 }}
           >
             Broadcast cameras, drones, off-grid power, fishing electronics, and field
-            audio — chosen and serialized for serious outdoor operators.
+            audio. Every system serialized before it ships.
           </motion.p>
 
           <motion.div
