@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, Search, ShoppingBag, X } from 'lucide-react';
 import { useCart, computeTotals } from '@/lib/store';
 import { cn } from '@/lib/format';
@@ -23,6 +23,18 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const badgeRef = useRef<HTMLSpanElement>(null);
+  const prevCount = useRef(totals.itemsCount);
+
+  useEffect(() => {
+    if (totals.itemsCount > prevCount.current && badgeRef.current) {
+      badgeRef.current.classList.remove('wt-pill-bump');
+      // force reflow so animation restarts
+      void badgeRef.current.offsetWidth;
+      badgeRef.current.classList.add('wt-pill-bump');
+    }
+    prevCount.current = totals.itemsCount;
+  }, [totals.itemsCount]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -46,11 +58,15 @@ export default function Nav() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-out',
+          'fixed inset-x-0 top-0 z-40',
           onDark
             ? 'bg-gradient-to-b from-navy-950/80 to-transparent'
             : 'bg-ivory-50/95 backdrop-blur-xl border-b border-navy-900/[0.08] shadow-card',
         )}
+        style={{
+          transition:
+            'background-color 280ms cubic-bezier(0.22,1,0.36,1), border-color 280ms cubic-bezier(0.22,1,0.36,1), box-shadow 280ms cubic-bezier(0.22,1,0.36,1)',
+        }}
       >
         <div className="container-wt flex items-center justify-between gap-6 py-4">
           <Link
@@ -93,7 +109,7 @@ export default function Nav() {
               type="button"
               onClick={() => setSearchOpen(true)}
               className={cn(
-                'inline-grid place-items-center w-10 h-10 border transition-colors focus-ring',
+                'press inline-grid place-items-center w-10 h-10 border focus-ring',
                 onDark
                   ? 'border-ivory-50/15 text-ivory-200 hover:text-ivory-50 hover:border-ivory-50/40'
                   : 'border-navy-900/15 text-graphite-700 hover:text-navy-900 hover:border-navy-900/40',
@@ -107,7 +123,7 @@ export default function Nav() {
               type="button"
               onClick={openCart}
               className={cn(
-                'relative inline-flex items-center gap-2 px-3 py-2 border transition-colors focus-ring',
+                'press relative inline-flex items-center gap-2 px-3 py-2 border focus-ring',
                 onDark
                   ? 'border-ivory-50/15 text-ivory-200 hover:text-ivory-50 hover:border-ivory-50/40'
                   : 'border-navy-900/15 text-graphite-700 hover:text-navy-900 hover:border-navy-900/40',
@@ -119,6 +135,7 @@ export default function Nav() {
                 Cart
               </span>
               <span
+                ref={badgeRef}
                 className={cn(
                   'inline-grid place-items-center min-w-[20px] h-5 px-1 text-[0.66rem] font-bold leading-none',
                   totals.itemsCount > 0
@@ -136,7 +153,7 @@ export default function Nav() {
               type="button"
               onClick={() => setMobileOpen(true)}
               className={cn(
-                'lg:hidden inline-grid place-items-center w-10 h-10 border focus-ring',
+                'press lg:hidden inline-grid place-items-center w-10 h-10 border focus-ring',
                 onDark
                   ? 'border-ivory-50/15 text-ivory-50'
                   : 'border-navy-900/15 text-navy-900',
@@ -167,7 +184,7 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
-              className="inline-grid place-items-center w-10 h-10 border border-ivory-50/15 text-ivory-50 focus-ring"
+              className="press inline-grid place-items-center w-10 h-10 border border-ivory-50/15 text-ivory-50 focus-ring"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />

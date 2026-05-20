@@ -90,31 +90,56 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.18em] font-semibold text-[0.82rem] px-6 py-3.5 border transition-all duration-200 ease-out cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.18em] font-semibold text-[0.82rem] px-6 py-3.5 border cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+    transition:
+      transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .btn:active:not(:disabled) {
+    transform: scale(0.97);
   }
   .btn-primary {
-    @apply bg-red-600 border-red-600 text-ivory-50 hover:bg-red-500 hover:border-red-500;
+    @apply bg-red-600 border-red-600 text-ivory-50;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { @apply bg-red-500 border-red-500; }
   }
   .btn-secondary {
-    @apply bg-navy-900 border-navy-900 text-ivory-50 hover:bg-navy-800 hover:border-navy-800;
+    @apply bg-navy-900 border-navy-900 text-ivory-50;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-secondary:hover { @apply bg-navy-800 border-navy-800; }
   }
   .btn-outline {
-    /* For use on dark surfaces */
-    @apply bg-transparent border-ivory-50/40 text-ivory-50 hover:border-ivory-50 hover:bg-ivory-50/10;
+    @apply bg-transparent border-ivory-50/40 text-ivory-50;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-outline:hover { @apply border-ivory-50 bg-ivory-50/10; }
   }
   .btn-outline-dark {
-    /* For use on light surfaces */
-    @apply bg-transparent border-navy-900/30 text-navy-900 hover:border-navy-900 hover:bg-navy-900/[0.04];
+    @apply bg-transparent border-navy-900/30 text-navy-900;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-outline-dark:hover { @apply border-navy-900 bg-navy-900/[0.04]; }
   }
   .btn-ghost {
-    @apply bg-transparent border-transparent text-red-600 hover:text-red-500 px-2;
+    @apply bg-transparent border-transparent text-red-600 px-2;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover { @apply text-red-500; }
   }
   .btn-ghost::after {
     content: '→';
     margin-left: 4px;
     transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    display: inline-block;
   }
-  .btn-ghost:hover::after { transform: translateX(4px); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-ghost:hover::after { transform: translateX(4px); }
+  }
   .btn-sm  { @apply px-4 py-2 text-[0.74rem]; }
   .btn-lg  { @apply px-8 py-4 text-[0.92rem]; }
 
@@ -158,9 +183,55 @@
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-50;
   }
+
+  /* Standardized press feedback for non-.btn pressables (icon buttons,
+     qty steppers, drawer close, etc.). Subtle 0.94 scale on :active. */
+  .press {
+    transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 180ms cubic-bezier(0.22, 1, 0.36, 1),
+                color 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .press:active:not(:disabled) {
+    transform: scale(0.94);
+  }
+
+  /* Reduced motion: kill every transform/animation we add */
+  @media (prefers-reduced-motion: reduce) {
+    .press, .press:active { transform: none; }
+    .btn, .btn:active { transform: none; }
+  }
 }
 
 @layer utilities {
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
+}
+
+/* ── Component entrance keyframes ───────────────────────────── */
+@keyframes wtFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes wtSearchEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes wtPillBump {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+.wt-pill-bump {
+  animation: wtPillBump 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }

@@ -69,7 +69,7 @@ export default function CartDrawer() {
           <button
             type="button"
             onClick={closeCart}
-            className="inline-grid place-items-center w-9 h-9 border border-ivory-50/15 text-ivory-50 hover:border-ivory-50/40 focus-ring"
+            className="press inline-grid place-items-center w-9 h-9 border border-ivory-50/15 text-ivory-50 hover:border-ivory-50/40 focus-ring"
             aria-label="Close cart"
           >
             <X className="w-4 h-4" />
@@ -106,7 +106,7 @@ export default function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => setQty(l.productId, l.qty - 1)}
-                        className="inline-grid place-items-center w-8 h-8 bg-ivory-50 hover:bg-ivory-100 text-navy-900 focus-ring"
+                        className="press inline-grid place-items-center w-8 h-8 bg-ivory-50 hover:bg-ivory-100 text-navy-900 focus-ring"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="w-3 h-3" />
@@ -117,7 +117,7 @@ export default function CartDrawer() {
                       <button
                         type="button"
                         onClick={() => setQty(l.productId, l.qty + 1)}
-                        className="inline-grid place-items-center w-8 h-8 bg-ivory-50 hover:bg-ivory-100 text-navy-900 focus-ring"
+                        className="press inline-grid place-items-center w-8 h-8 bg-ivory-50 hover:bg-ivory-100 text-navy-900 focus-ring"
                         aria-label="Increase quantity"
                       >
                         <Plus className="w-3 h-3" />

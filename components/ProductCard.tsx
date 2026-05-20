@@ -66,7 +66,7 @@ export default function ProductCard({
               e.preventDefault();
               setZoomed((z) => !z);
             }}
-            className="absolute bottom-4 right-4 inline-grid place-items-center w-10 h-10 border border-ivory-50/60 bg-navy-950/70 backdrop-blur text-ivory-50 opacity-0 group-hover:opacity-100 transition-opacity focus-ring"
+            className="press absolute bottom-4 right-4 inline-grid place-items-center w-10 h-10 border border-ivory-50/60 bg-navy-950/70 backdrop-blur text-ivory-50 opacity-0 group-hover:opacity-100 transition-opacity focus-ring"
             aria-label={zoomed ? 'Reset zoom' : 'Zoom image'}
           >
             <ZoomIn className="w-4 h-4" />

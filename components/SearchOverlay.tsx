@@ -56,10 +56,17 @@ export default function SearchOverlay({
       role="dialog"
       aria-modal="true"
       aria-label="Search products"
+      style={{
+        animation: 'wtFadeIn 180ms cubic-bezier(0.22,1,0.36,1)',
+      }}
     >
       <div
         className="w-full max-w-2xl bg-ivory-50 border border-navy-900/[0.08] shadow-elev mt-12 sm:mt-24"
         onClick={(e) => e.stopPropagation()}
+        style={{
+          animation: 'wtSearchEnter 220ms cubic-bezier(0.22,1,0.36,1)',
+          transformOrigin: 'top center',
+        }}
       >
         <div className="flex items-center gap-3 px-5 py-4 border-b border-navy-900/[0.08]">
           <Search className="w-5 h-5 text-red-600 flex-shrink-0" />
@@ -74,7 +81,7 @@ export default function SearchOverlay({
           <button
             type="button"
             onClick={onClose}
-            className="inline-grid place-items-center w-8 h-8 text-graphite-500 hover:text-navy-900 focus-ring"
+            className="press inline-grid place-items-center w-8 h-8 text-graphite-500 hover:text-navy-900 focus-ring"
             aria-label="Close search"
           >
             <X className="w-4 h-4" />
