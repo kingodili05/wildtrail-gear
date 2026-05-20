@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Minus, Plus, ShieldCheck, ShoppingBag, Truck, X } from 'lucide-react';
 import { useCart, computeTotals } from '@/lib/store';
 import { money } from '@/lib/format';
 
 export default function CartDrawer() {
+  const router = useRouter();
   const open = useCart((s) => s.open);
   const closeCart = useCart((s) => s.closeCart);
   const setQty = useCart((s) => s.setQty);
@@ -14,6 +16,11 @@ export default function CartDrawer() {
   const items = useCart((s) => s.items);
   const hydrated = useCart((s) => s.hydrated);
   const totals = computeTotals(items);
+
+  function goToCheckout() {
+    closeCart();
+    router.push('/checkout');
+  }
 
   useEffect(() => {
     if (open) {
@@ -183,7 +190,11 @@ export default function CartDrawer() {
               </div>
             </div>
 
-            <button type="button" className="btn btn-primary btn-lg w-full">
+            <button
+              type="button"
+              onClick={goToCheckout}
+              className="btn btn-primary btn-lg w-full"
+            >
               Initiate Secure Checkout
             </button>
             <div className="flex justify-between text-xs">
