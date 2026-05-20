@@ -3,8 +3,21 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, Truck, Lock, ArrowLeft } from 'lucide-react';
+import {
+  ShieldCheck,
+  Truck,
+  ArrowLeft,
+  Banknote,
+  FileCheck,
+} from 'lucide-react';
 import { useCart, computeTotals } from '@/lib/store';
+import { readPaymentSettings } from '@/lib/admin-store';
+import {
+  PAYMENT_METHOD_LABEL,
+  PAYMENT_METHOD_DESCRIPTION,
+  type PaymentMethodId,
+  type PaymentSettings,
+} from '@/lib/payment-settings';
 import { money } from '@/lib/format';
 
 type Step = 'shipping' | 'payment' | 'placing';
@@ -16,6 +29,7 @@ export default function CheckoutPage() {
   const hydrated = useCart((s) => s.hydrated);
   const totals = computeTotals(items);
 
+  const [settings, setSettings] = useState<PaymentSettings | null>(null);
   const [step, setStep] = useState<Step>('shipping');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -30,17 +44,26 @@ export default function CheckoutPage() {
     zip: '',
     country: 'United States',
     phone: '',
-    cardName: '',
-    cardNumber: '',
-    cardExpiry: '',
-    cardCvc: '',
   });
+  const [method, setMethod] = useState<PaymentMethodId>('wire');
+
+  useEffect(() => {
+    setSettings(readPaymentSettings());
+  }, []);
 
   useEffect(() => {
     if (hydrated && items.length === 0 && !submitting) {
       router.replace('/products');
     }
   }, [hydrated, items.length, router, submitting]);
+
+  // Choose first enabled method as default once settings loaded
+  useEffect(() => {
+    if (!settings) return;
+    const order: PaymentMethodId[] = ['wire', 'check'];
+    const first = order.find((m) => settings.enabled[m]);
+    if (first) setMethod(first);
+  }, [settings]);
 
   function set(k: keyof typeof form, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
@@ -55,16 +78,7 @@ export default function CheckoutPage() {
     return null;
   }
 
-  function validatePayment(): string | null {
-    if (!form.cardName) return 'Name on card is required.';
-    if (!/^[0-9 ]{12,23}$/.test(form.cardNumber)) return 'Card number looks invalid.';
-    if (!/^(0[1-9]|1[0-2])\s*\/\s*\d{2}$/.test(form.cardExpiry))
-      return 'Expiry should be MM/YY.';
-    if (!/^\d{3,4}$/.test(form.cardCvc)) return 'CVC should be 3-4 digits.';
-    return null;
-  }
-
-  async function handleContinue() {
+  function handleContinue() {
     const v = validateShipping();
     if (v) {
       setError(v);
@@ -75,9 +89,8 @@ export default function CheckoutPage() {
   }
 
   async function handlePlaceOrder() {
-    const v = validatePayment();
-    if (v) {
-      setError(v);
+    if (!settings?.enabled[method]) {
+      setError('Selected payment method is not currently enabled.');
       return;
     }
     setError(null);
@@ -91,24 +104,17 @@ export default function CheckoutPage() {
         body: JSON.stringify({
           items,
           totals,
-          shipping: {
-            email: form.email,
-            firstName: form.firstName,
-            lastName: form.lastName,
-            address: form.address,
-            city: form.city,
-            state: form.state,
-            zip: form.zip,
-            country: form.country,
-            phone: form.phone,
-          },
+          paymentMethod: method,
+          shipping: { ...form },
         }),
       });
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || 'Order failed.');
 
       clear();
-      router.replace(`/checkout/success?order=${encodeURIComponent(data.orderId)}`);
+      router.replace(
+        `/checkout/success?order=${encodeURIComponent(data.orderId)}&method=${method}`,
+      );
     } catch (e: any) {
       setError(e.message || 'Could not place order. Try again.');
       setStep('payment');
@@ -116,10 +122,10 @@ export default function CheckoutPage() {
     }
   }
 
-  if (!hydrated || items.length === 0) {
+  if (!hydrated || items.length === 0 || !settings) {
     return (
       <section className="min-h-[60vh] grid place-items-center bg-ivory-50">
-        <div className="text-center space-y-3">
+        <div className="text-center">
           <p className="text-graphite-500 font-mono text-sm uppercase tracking-[0.3em]">
             Loading cart…
           </p>
@@ -127,6 +133,10 @@ export default function CheckoutPage() {
       </section>
     );
   }
+
+  const methodOptions: PaymentMethodId[] = (['wire', 'check'] as PaymentMethodId[]).filter(
+    (m) => settings.enabled[m],
+  );
 
   return (
     <>
@@ -153,7 +163,6 @@ export default function CheckoutPage() {
 
       <section className="bg-ivory-50 py-16">
         <div className="container-wt grid grid-cols-1 lg:grid-cols-[1.4fr,1fr] gap-10">
-          {/* Form */}
           <div className="bg-ivory-50 border border-navy-900/[0.08] shadow-card">
             {step === 'shipping' && (
               <div className="p-8 md:p-10 space-y-6">
@@ -223,50 +232,37 @@ export default function CheckoutPage() {
 
             {step === 'payment' && (
               <div className="p-8 md:p-10 space-y-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="display-h2 text-navy-900">Payment</h2>
-                  <div className="inline-flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-[0.28em] text-graphite-500">
-                    <Lock className="w-3.5 h-3.5 text-red-600" />
-                    Encrypted
+                <h2 className="display-h2 text-navy-900">Payment Method</h2>
+                <p className="text-graphite-500 text-sm leading-relaxed max-w-[60ch]">
+                  Choose how to pay. Bank wire or mailing details will be delivered on the
+                  order confirmation screen and emailed to you.
+                </p>
+
+                {methodOptions.length === 0 ? (
+                  <ErrorLine text="No payment methods are currently enabled. Contact support." />
+                ) : (
+                  <div className="grid grid-cols-1 gap-3">
+                    {methodOptions.map((m) => (
+                      <MethodOption
+                        key={m}
+                        id={m}
+                        active={method === m}
+                        onClick={() => setMethod(m)}
+                      />
+                    ))}
                   </div>
-                </div>
-                <Field label="Name On Card *">
-                  <Input value={form.cardName} onChange={(v) => set('cardName', v)} />
-                </Field>
-                <Field label="Card Number *">
-                  <Input
-                    value={form.cardNumber}
-                    onChange={(v) => set('cardNumber', v.replace(/[^0-9 ]/g, '').slice(0, 19))}
-                    placeholder="4242 4242 4242 4242"
-                    inputMode="numeric"
-                  />
-                </Field>
-                <div className="grid grid-cols-2 gap-4">
-                  <Field label="Expiry MM/YY *">
-                    <Input
-                      value={form.cardExpiry}
-                      onChange={(v) => set('cardExpiry', v.slice(0, 7))}
-                      placeholder="08/27"
-                    />
-                  </Field>
-                  <Field label="CVC *">
-                    <Input
-                      value={form.cardCvc}
-                      onChange={(v) => set('cardCvc', v.replace(/\D/g, '').slice(0, 4))}
-                      placeholder="123"
-                      inputMode="numeric"
-                    />
-                  </Field>
-                </div>
+                )}
+
                 <div className="bg-ivory-100 border border-navy-900/[0.08] px-4 py-3 text-xs text-graphite-500 flex items-start gap-2">
                   <ShieldCheck className="w-4 h-4 text-red-600 flex-shrink-0 mt-px" />
                   <span>
-                    Demo checkout. No live card processor wired yet — replace the{' '}
-                    <code className="font-mono text-graphite-700">/api/checkout</code> route with a
-                    real Stripe payment intent before going public.
+                    Your order will be reserved on submission. Payment details
+                    arrive on the next screen and via email.
                   </span>
                 </div>
+
                 {error && <ErrorLine text={error} />}
+
                 <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-between">
                   <button
                     type="button"
@@ -281,6 +277,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={handlePlaceOrder}
+                    disabled={methodOptions.length === 0}
                     className="btn btn-primary btn-lg"
                   >
                     Place Order · {money(totals.total)}
@@ -294,13 +291,12 @@ export default function CheckoutPage() {
                 <div className="inline-block w-12 h-12 border-2 border-navy-900/15 border-t-red-600 rounded-full animate-spin" />
                 <h2 className="display-h2 text-navy-900">Placing Order…</h2>
                 <p className="text-graphite-500 max-w-[40ch] mx-auto">
-                  Securing payment and reserving units. This usually takes a few seconds.
+                  Reserving units and preparing your payment instructions.
                 </p>
               </div>
             )}
           </div>
 
-          {/* Summary */}
           <aside className="bg-navy-950 text-ivory-50 border border-navy-900 shadow-elev p-8 md:p-10 self-start sticky top-28">
             <div className="eyebrow mb-4">Order Summary</div>
             <h2 className="display-h2 text-ivory-50 mb-6">{totals.itemsCount} Items</h2>
@@ -308,11 +304,7 @@ export default function CheckoutPage() {
               {totals.lines.map((l) => (
                 <li key={l.productId} className="flex gap-3">
                   <div className="w-16 h-16 bg-navy-900 overflow-hidden flex-shrink-0">
-                    <img
-                      src={l.image}
-                      alt=""
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={l.image} alt="" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="font-display font-bold uppercase tracking-tight text-ivory-50 text-sm leading-snug line-clamp-2">
@@ -356,13 +348,57 @@ export default function CheckoutPage() {
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
-                AES-256 encrypted checkout
+                Order reference reconciles each payment
               </div>
             </div>
           </aside>
         </div>
       </section>
     </>
+  );
+}
+
+function MethodOption({
+  id,
+  active,
+  onClick,
+}: {
+  id: PaymentMethodId;
+  active: boolean;
+  onClick: () => void;
+}) {
+  const Icon = id === 'wire' ? Banknote : FileCheck;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex items-start gap-4 p-5 border text-left transition-colors focus-ring ${
+        active
+          ? 'border-red-500 bg-red-500/[0.04] ring-1 ring-red-500'
+          : 'border-navy-900/[0.12] hover:border-navy-900/30 bg-ivory-50'
+      }`}
+    >
+      <span
+        className={`inline-grid place-items-center w-11 h-11 ${
+          active ? 'bg-red-600 text-ivory-50' : 'bg-navy-900 text-ivory-50'
+        }`}
+      >
+        <Icon className="w-5 h-5" />
+      </span>
+      <span className="flex-1">
+        <span className="block font-display font-bold uppercase tracking-tight text-navy-900">
+          {PAYMENT_METHOD_LABEL[id]}
+        </span>
+        <span className="block text-sm text-graphite-500 leading-relaxed mt-1">
+          {PAYMENT_METHOD_DESCRIPTION[id]}
+        </span>
+      </span>
+      <span
+        className={`mt-1 inline-block w-4 h-4 rounded-full border-2 ${
+          active ? 'border-red-600 bg-red-600' : 'border-navy-900/30'
+        }`}
+      />
+    </button>
   );
 }
 
