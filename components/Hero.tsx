@@ -16,25 +16,25 @@ export default function Hero() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-ink-950">
+    <section className="relative min-h-[100svh] flex items-end overflow-hidden bg-navy-950">
       <div className="absolute inset-0">{!reduced && <TerrainScene />}</div>
 
       <div
-        className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/85 to-ink-950/30"
+        className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/85 to-navy-950/30"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 grid-bg opacity-20 pointer-events-none"
+        className="absolute inset-0 grid-bg-dark opacity-30 pointer-events-none"
         aria-hidden="true"
       />
 
       <div
-        className="absolute top-32 right-6 md:right-12 hidden md:flex flex-col items-end gap-1 text-right font-mono text-[0.66rem] tracking-[0.3em] uppercase text-bone-300/60 z-10"
+        className="absolute top-32 right-6 md:right-12 hidden md:flex flex-col items-end gap-1 text-right font-mono text-[0.66rem] tracking-[0.3em] uppercase text-ivory-200/60 z-10"
         aria-hidden="true"
       >
         <span>N 34° 11′ 47″</span>
         <span>W 86° 28′ 02″</span>
-        <span className="text-safety-500">/// BASECAMP-07 ///</span>
+        <span className="text-red-500">/// CATALOG-07 ///</span>
       </div>
 
       <div className="container-wt relative z-10 pb-24 pt-40">
@@ -45,27 +45,27 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease, delay: 0.2 }}
           >
-            Luxury Tactical Expedition Outfitter
+            Premium Creator &amp; Outdoor Gear
           </motion.span>
 
           <motion.h1
-            className="display-h1 text-bone-50"
+            className="display-h1 text-ivory-50"
             initial={reduced ? false : { opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.35 }}
           >
             Equipping The Wild.
-            <span className="block text-safety-500">Streaming The Adventure.</span>
+            <span className="block text-red-500">Streaming The Adventure.</span>
           </motion.h1>
 
           <motion.p
-            className="text-bone-200 text-lg md:text-xl max-w-2xl leading-relaxed"
+            className="text-ivory-200 text-lg md:text-xl max-w-2xl leading-relaxed"
             initial={reduced ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease, delay: 0.55 }}
           >
-            Hand-built power, broadcast, and precision systems for operators who run remote
-            base camps, command thermal drones, and stream 4K from places without roads.
+            Broadcast cameras, drones, off-grid power, fishing electronics, and field
+            audio — chosen and serialized for serious outdoor operators.
           </motion.p>
 
           <motion.div
@@ -84,20 +84,20 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="hidden md:grid grid-cols-3 gap-px bg-bone-50/[0.06] mt-16 max-w-3xl"
+            className="hidden md:grid grid-cols-3 gap-px bg-ivory-50/[0.06] mt-16 max-w-3xl"
             initial={reduced ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 0.9 }}
           >
             <Stat label="Operators Equipped" value="412" sub="2024-2026" />
             <Stat label="Continuous Field Hours" value="2.8M" sub="Logged uptime" />
-            <Stat label="Streams Delivered" value="9,471" sub="4K bonded" />
+            <Stat label="Orders Shipped" value="9,471" sub="Worldwide" />
           </motion.div>
         </div>
       </div>
 
       <div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 text-bone-300/70 font-mono text-[0.7rem] tracking-[0.3em] uppercase z-10"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 text-ivory-200/70 font-mono text-[0.7rem] tracking-[0.3em] uppercase z-10"
         aria-hidden="true"
       >
         <Crosshair className="w-3.5 h-3.5" />
@@ -109,12 +109,12 @@ export default function Hero() {
 
 function Stat({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
-    <div className="bg-ink-950/80 backdrop-blur-sm p-5">
-      <div className="font-display text-[0.65rem] tracking-[0.3em] uppercase text-safety-500 mb-2">
+    <div className="bg-navy-950/80 backdrop-blur-sm p-5">
+      <div className="font-display text-[0.65rem] tracking-[0.3em] uppercase text-red-500 mb-2">
         {label}
       </div>
-      <div className="font-display font-bold text-3xl text-bone-50 tabular-nums">{value}</div>
-      <div className="text-bone-400 text-xs mt-1 font-mono uppercase tracking-wider">{sub}</div>
+      <div className="font-display font-bold text-3xl text-ivory-50 tabular-nums">{value}</div>
+      <div className="text-ivory-200/60 text-xs mt-1 font-mono uppercase tracking-wider">{sub}</div>
     </div>
   );
 }

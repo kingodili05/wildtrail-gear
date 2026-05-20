@@ -46,10 +46,10 @@ function Terrain() {
   return (
     <group rotation={[-Math.PI / 2.6, 0, 0]} position={[0, -4, 0]}>
       <mesh ref={meshRef} geometry={geometry}>
-        <meshBasicMaterial color="#0A0A0A" transparent opacity={0.92} />
+        <meshBasicMaterial color="#050A1F" transparent opacity={0.94} />
       </mesh>
       <lineSegments ref={lineRef} geometry={lineGeometry}>
-        <lineBasicMaterial color="#3A403A" transparent opacity={0.55} />
+        <lineBasicMaterial color="#2C5AA8" transparent opacity={0.55} />
       </lineSegments>
     </group>
   );
@@ -83,11 +83,11 @@ function DustField({ count = 800 }: { count?: number }) {
     <Points ref={ref} positions={positions} stride={3}>
       <PointMaterial
         transparent
-        color="#FF5722"
+        color="#DD2A2A"
         size={0.045}
         sizeAttenuation
         depthWrite={false}
-        opacity={0.55}
+        opacity={0.6}
       />
     </Points>
   );
@@ -113,11 +113,11 @@ export default function TerrainScene() {
     >
       <PerspectiveCamera makeDefault position={[0, 6, 16]} fov={42} />
       <CameraDrift />
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 20, 10]} intensity={0.6} color="#FF5722" />
+      <ambientLight intensity={0.45} />
+      <directionalLight position={[10, 20, 10]} intensity={0.6} color="#DD2A2A" />
       <Terrain />
       <DustField />
-      <fog attach="fog" args={['#0A0A0A', 14, 32]} />
+      <fog attach="fog" args={['#050A1F', 14, 32]} />
     </Canvas>
   );
 }

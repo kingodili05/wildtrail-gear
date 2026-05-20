@@ -40,14 +40,16 @@ export default function Nav() {
     }
   }, [mobileOpen]);
 
+  const onDark = !scrolled;
+
   return (
     <>
       <header
         className={cn(
           'fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-out',
-          scrolled
-            ? 'bg-ink-950/85 backdrop-blur-xl border-b border-bone-50/[0.06]'
-            : 'bg-gradient-to-b from-ink-950/60 to-transparent',
+          onDark
+            ? 'bg-gradient-to-b from-navy-950/80 to-transparent'
+            : 'bg-ivory-50/95 backdrop-blur-xl border-b border-navy-900/[0.08] shadow-card',
         )}
       >
         <div className="container-wt flex items-center justify-between gap-6 py-4">
@@ -56,11 +58,16 @@ export default function Nav() {
             className="flex items-center gap-2.5 focus-ring rounded-sm"
             aria-label="WildTrail Gear home"
           >
-            <span className="inline-grid place-items-center w-9 h-9 bg-safety-600 text-ink-950 font-display font-bold text-sm tracking-wider">
+            <span className="inline-grid place-items-center w-9 h-9 bg-red-600 text-ivory-50 font-display font-bold text-sm tracking-wider">
               WT
             </span>
-            <span className="font-display font-bold tracking-wider uppercase text-bone-50 leading-none">
-              WildTrail<span className="text-safety-500">Gear</span>
+            <span
+              className={cn(
+                'font-display font-bold tracking-wider uppercase leading-none transition-colors',
+                onDark ? 'text-ivory-50' : 'text-navy-900',
+              )}
+            >
+              WildTrail<span className="text-red-600">Gear</span>
             </span>
           </Link>
 
@@ -69,7 +76,12 @@ export default function Nav() {
               <Link
                 key={l.href + l.label}
                 href={l.href}
-                className="px-3 py-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-medium text-bone-200 hover:text-bone-50 transition-colors focus-ring"
+                className={cn(
+                  'px-3 py-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-medium transition-colors focus-ring',
+                  onDark
+                    ? 'text-ivory-200 hover:text-ivory-50'
+                    : 'text-graphite-700 hover:text-navy-900',
+                )}
               >
                 {l.label}
               </Link>
@@ -80,7 +92,12 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="inline-grid place-items-center w-10 h-10 border border-bone-50/10 text-bone-200 hover:text-bone-50 hover:border-bone-50/30 transition-colors focus-ring"
+              className={cn(
+                'inline-grid place-items-center w-10 h-10 border transition-colors focus-ring',
+                onDark
+                  ? 'border-ivory-50/15 text-ivory-200 hover:text-ivory-50 hover:border-ivory-50/40'
+                  : 'border-navy-900/15 text-graphite-700 hover:text-navy-900 hover:border-navy-900/40',
+              )}
               aria-label="Open search"
             >
               <Search className="w-4 h-4" />
@@ -89,7 +106,12 @@ export default function Nav() {
             <button
               type="button"
               onClick={openCart}
-              className="relative inline-flex items-center gap-2 px-3 py-2 border border-bone-50/10 text-bone-200 hover:text-bone-50 hover:border-bone-50/30 transition-colors focus-ring"
+              className={cn(
+                'relative inline-flex items-center gap-2 px-3 py-2 border transition-colors focus-ring',
+                onDark
+                  ? 'border-ivory-50/15 text-ivory-200 hover:text-ivory-50 hover:border-ivory-50/40'
+                  : 'border-navy-900/15 text-graphite-700 hover:text-navy-900 hover:border-navy-900/40',
+              )}
               aria-label={`Open cart, ${totals.itemsCount} items`}
             >
               <ShoppingBag className="w-4 h-4" />
@@ -100,8 +122,10 @@ export default function Nav() {
                 className={cn(
                   'inline-grid place-items-center min-w-[20px] h-5 px-1 text-[0.66rem] font-bold leading-none',
                   totals.itemsCount > 0
-                    ? 'bg-safety-600 text-ink-950'
-                    : 'bg-ink-700 text-bone-300',
+                    ? 'bg-red-600 text-ivory-50'
+                    : onDark
+                    ? 'bg-navy-700 text-ivory-200'
+                    : 'bg-ivory-200 text-graphite-700',
                 )}
               >
                 {totals.itemsCount}
@@ -111,7 +135,12 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden inline-grid place-items-center w-10 h-10 border border-bone-50/10 text-bone-50 focus-ring"
+              className={cn(
+                'lg:hidden inline-grid place-items-center w-10 h-10 border focus-ring',
+                onDark
+                  ? 'border-ivory-50/15 text-ivory-50'
+                  : 'border-navy-900/15 text-navy-900',
+              )}
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
@@ -121,24 +150,24 @@ export default function Nav() {
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 bg-ink-950 lg:hidden flex flex-col">
+        <div className="fixed inset-0 z-50 bg-navy-950 lg:hidden flex flex-col">
           <div className="container-wt flex items-center justify-between py-4">
             <Link
               href="/"
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2.5"
             >
-              <span className="inline-grid place-items-center w-9 h-9 bg-safety-600 text-ink-950 font-display font-bold text-sm tracking-wider">
+              <span className="inline-grid place-items-center w-9 h-9 bg-red-600 text-ivory-50 font-display font-bold text-sm tracking-wider">
                 WT
               </span>
-              <span className="font-display font-bold tracking-wider uppercase text-bone-50">
-                WildTrail<span className="text-safety-500">Gear</span>
+              <span className="font-display font-bold tracking-wider uppercase text-ivory-50">
+                WildTrail<span className="text-red-500">Gear</span>
               </span>
             </Link>
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
-              className="inline-grid place-items-center w-10 h-10 border border-bone-50/10 text-bone-50 focus-ring"
+              className="inline-grid place-items-center w-10 h-10 border border-ivory-50/15 text-ivory-50 focus-ring"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />
@@ -150,7 +179,7 @@ export default function Nav() {
                 key={l.href + l.label}
                 href={l.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-4 border-b border-bone-50/[0.06] font-display text-2xl uppercase tracking-tight font-bold text-bone-50 hover:text-safety-500 transition-colors"
+                className="py-4 border-b border-ivory-50/[0.08] font-display text-2xl uppercase tracking-tight font-bold text-ivory-50 hover:text-red-500 transition-colors"
               >
                 {l.label}
               </Link>

@@ -1,29 +1,38 @@
 # WildTrail Gear — Design System
 
 ## Aesthetic lane
-**Luxury tactical / engineered minimalism.** Sub-lanes: Aesop restraint × Linear precision × Sitka palette × Apple-grade 3D product moments.
+**Premium retailer × pro-spec catalog.** Sub-lanes: B&O-grade product photography × Saks Fifth Avenue navy restraint × engineered specsheet precision × Adorama category-leadership cues.
 
-NOT: editorial-magazine, dark glass / Web3, neon cyberpunk, warm-coastal, generic SaaS-creator.
+NOT: tactical dark monolith (previous pass — too cosplay for this catalog), generic Shopify cream, fintech navy-and-gold, Web3 glassmorphism, candy-bright sale-flyer red.
 
-## Color strategy — Drenched dark with razor accent
+## Color strategy — Light retailer body, navy authority surfaces, red as razor
+
+The catalog mostly lives on a warm ivory body. Dark navy carries the brand-statement surfaces (hero, footer, key cells). Red appears as a flagged accent on sale prices, CTAs, and a single deliberate marker per fold — never decorative.
 
 ```
-ink-950  #0A0A0A   primary surface, almost ~70% of all pixels
-ink-900  #111111   elevated panels and dividers
-ink-800  #1A1A1A   secondary surface (deep charcoal)
-ink-700  #222222   hairline contrast for borders
-forest-700 #3A403A tactical forest gray — used for moss accents only
-forest-600 #4A524A subtle dust tint on photography
-safety-500 #FF5722 razor accent (≤10% of any view)
-safety-600 #D9461A primary CTA fill
-bone-50  #F5F2EC  tinted neutral for body text on dark
-bone-300 #9C9580  muted text on dark
+navy-950  #050A1F   deepest navy, hero contrast, footer
+navy-900  #0A1733   primary brand surface
+navy-800  #0F2147   elevated panels
+navy-700  #173063   secondary panels, photography overlay
+navy-600  #1F4083   interactive hover
+navy-500  #2C5AA8   links and active states
+navy-400  #4F7DCE   muted accent on dark
+ivory-50   #FAFAF7  primary light surface (warm white)
+ivory-100  #F2F1EB  alternating panel
+ivory-200  #E2E0D6  hairline rule contrast on light
+graphite-700 #2D2D27 body text on light
+graphite-500 #67675E muted text on light
+graphite-300 #B5B5AC tertiary text on light
+red-700   #9B1A21   pressed CTA
+red-600   #BF252D   sale chip
+red-500   #DD2A2A   primary accent · CTA · razor
+red-400   #E85059   hover state
 ```
 
-No `#000`. No `#fff`. Every neutral is OKLCH-equivalent (tinted toward the forest hue).
+No `#000`. No `#fff`. Ivory is warmed toward yellow; navy is cooled toward true blue — palette stays decisive, not muddy. Red sits at a single saturation point so it never reads as a different brand.
 
 ## Typography
-- **Display:** **Rajdhani** 500/600/700 — geometric, condensed, military-precision feel. Cap height tight to baseline.
+- **Display:** **Rajdhani** 500/600/700 — geometric condensed sans with technical-spec authority. Replaces editorial serif reflex and the generic Inter/DM-Sans default.
 - **Body:** **Geist Sans** 400/500/600 — neutral, sharp, legible at 14px.
 - **Mono:** **Geist Mono** — telemetry, serial numbers, coordinates.
 

@@ -13,19 +13,19 @@ export default function HomePage() {
       <Hero />
       <CategoryGrid />
 
-      <section className="py-24 md:py-32 bg-ink-950">
+      <section className="py-24 md:py-32 bg-ivory-100">
         <div className="container-wt">
           <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
             <div>
               <div className="eyebrow mb-4">Flagship Systems</div>
-              <h2 className="display-h2 text-bone-50">The Top Of The Vault</h2>
-              <p className="text-bone-300 mt-4 max-w-[60ch]">
-                The three highest-value systems on the platform. Hand-tuned, individually
+              <h2 className="display-h2 text-navy-900">The Top Of The Catalog</h2>
+              <p className="text-graphite-500 mt-4 max-w-[60ch]">
+                The highest-value systems on the platform. Hand-tuned, individually
                 serialized, and field-validated before shipment.
               </p>
             </div>
-            <Link href="/products" className="btn btn-outline">
-              All 7 Systems
+            <Link href="/products" className="btn btn-outline-dark">
+              All Systems
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
@@ -38,18 +38,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative py-24 md:py-32 bg-ink-900 border-t border-bone-50/[0.06]">
-        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+      <section className="relative py-24 md:py-32 bg-navy-900 text-ivory-50 border-t border-ivory-50/[0.06]">
+        <div className="absolute inset-0 grid-bg-dark opacity-30 pointer-events-none" />
         <div className="container-wt relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="eyebrow mb-4">Operator Promise</div>
-              <h2 className="display-h2 text-bone-50">
+              <h2 className="display-h2 text-ivory-50">
                 Field-Tested. Logged.
                 <br />
-                <span className="text-safety-500">Documented.</span>
+                <span className="text-red-500">Documented.</span>
               </h2>
-              <p className="text-bone-200 mt-5 max-w-[52ch] leading-relaxed">
+              <p className="text-ivory-200 mt-5 max-w-[52ch] leading-relaxed">
                 Every system on this site has been deployed in the field — not in a lab —
                 before listing. Telemetry from each deployment is logged and reviewed.
                 Every order ships with the operator log of the unit you receive.
@@ -64,7 +64,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <ol className="space-y-px bg-bone-50/[0.06] border border-bone-50/[0.06]">
+            <ol className="space-y-px bg-ivory-50/[0.06] border border-ivory-50/[0.06]">
               {[
                 {
                   step: '01',
@@ -87,15 +87,15 @@ export default function HomePage() {
                   desc: 'Door-to-door insurance up to $25K, GPS-locked transit.',
                 },
               ].map((s) => (
-                <li key={s.step} className="grid grid-cols-[80px,1fr] gap-6 bg-ink-900 px-6 py-5">
-                  <span className="font-display font-bold text-3xl text-safety-500 tabular-nums">
+                <li key={s.step} className="grid grid-cols-[80px,1fr] gap-6 bg-navy-900 px-6 py-5">
+                  <span className="font-display font-bold text-3xl text-red-500 tabular-nums">
                     {s.step}
                   </span>
                   <div>
-                    <div className="font-display font-bold uppercase tracking-tight text-bone-50">
+                    <div className="font-display font-bold uppercase tracking-tight text-ivory-50">
                       {s.title}
                     </div>
-                    <div className="text-bone-300 text-sm mt-1">{s.desc}</div>
+                    <div className="text-ivory-200/70 text-sm mt-1">{s.desc}</div>
                   </div>
                 </li>
               ))}

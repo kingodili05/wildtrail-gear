@@ -5,8 +5,11 @@
 @layer base {
   :root {
     --grid-pattern:
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      linear-gradient(rgba(5, 10, 31, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(5, 10, 31, 0.04) 1px, transparent 1px);
+    --grid-pattern-dark:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   }
 
   * {
@@ -19,18 +22,19 @@
   }
 
   body {
-    @apply bg-ink-950 text-bone-50 font-sans antialiased;
+    @apply bg-ivory-50 text-graphite-700 font-sans antialiased;
     background-image: radial-gradient(
-      ellipse 90% 60% at 50% -10%,
-      rgba(58, 64, 58, 0.35),
+      ellipse 80% 50% at 50% -10%,
+      rgba(15, 33, 71, 0.06),
       transparent 60%
     );
     background-attachment: fixed;
+    font-size: 1rem;
   }
 
   ::selection {
-    background: theme('colors.safety.600');
-    color: theme('colors.ink.950');
+    background: theme('colors.red.500');
+    color: theme('colors.ivory.50');
   }
 
   ::-webkit-scrollbar {
@@ -38,14 +42,14 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: theme('colors.ink.900');
+    background: theme('colors.ivory.100');
   }
   ::-webkit-scrollbar-thumb {
-    background: theme('colors.ink.700');
-    border: 2px solid theme('colors.ink.900');
+    background: theme('colors.navy.700');
+    border: 2px solid theme('colors.ivory.100');
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.safety.600');
+    background: theme('colors.red.500');
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -65,15 +69,15 @@
   }
 
   .eyebrow {
-    @apply font-display text-eyebrow uppercase tracking-ultra text-safety-500 font-medium inline-flex items-center gap-3;
+    @apply font-display text-eyebrow uppercase tracking-ultra text-red-500 font-semibold inline-flex items-center gap-3;
   }
   .eyebrow::before {
     content: '';
-    @apply inline-block w-10 h-px bg-safety-500;
+    @apply inline-block w-10 h-px bg-red-500;
   }
 
   .display-h1 {
-    @apply font-display font-bold uppercase tracking-tighter leading-[0.92];
+    @apply font-display font-bold uppercase tracking-tight leading-[0.92];
     font-size: clamp(2.5rem, 7vw, 6.5rem);
   }
   .display-h2 {
@@ -89,47 +93,74 @@
     @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-[0.18em] font-semibold text-[0.82rem] px-6 py-3.5 border transition-all duration-200 ease-out cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn-primary {
-    @apply bg-safety-600 border-safety-600 text-ink-950 hover:bg-safety-500 hover:border-safety-500;
+    @apply bg-red-600 border-red-600 text-ivory-50 hover:bg-red-500 hover:border-red-500;
+  }
+  .btn-secondary {
+    @apply bg-navy-900 border-navy-900 text-ivory-50 hover:bg-navy-800 hover:border-navy-800;
   }
   .btn-outline {
-    @apply bg-transparent border-bone-50/30 text-bone-50 hover:border-bone-50 hover:bg-bone-50/5;
+    /* For use on dark surfaces */
+    @apply bg-transparent border-ivory-50/40 text-ivory-50 hover:border-ivory-50 hover:bg-ivory-50/10;
+  }
+  .btn-outline-dark {
+    /* For use on light surfaces */
+    @apply bg-transparent border-navy-900/30 text-navy-900 hover:border-navy-900 hover:bg-navy-900/[0.04];
   }
   .btn-ghost {
-    @apply bg-transparent border-transparent text-safety-500 hover:text-safety-400 px-2;
+    @apply bg-transparent border-transparent text-red-600 hover:text-red-500 px-2;
   }
-  .btn-lg {
-    @apply px-8 py-4 text-[0.92rem];
+  .btn-ghost::after {
+    content: '→';
+    margin-left: 4px;
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .btn-sm {
-    @apply px-4 py-2 text-[0.74rem];
-  }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+  .btn-sm  { @apply px-4 py-2 text-[0.74rem]; }
+  .btn-lg  { @apply px-8 py-4 text-[0.92rem]; }
 
-  .surface {
-    @apply bg-ink-900 border border-bone-50/[0.06];
+  /* Surface presets */
+  .surface-light {
+    @apply bg-ivory-50 border border-navy-900/[0.08];
+  }
+  .surface-dark {
+    @apply bg-navy-900 border border-ivory-50/[0.06] text-ivory-50;
+  }
+  .surface-panel {
+    @apply bg-ivory-100 border border-navy-900/[0.08];
   }
   .surface-hover {
-    @apply hover:border-bone-50/20 transition-colors duration-300;
+    @apply hover:border-navy-900/30 transition-colors duration-300;
+  }
+  /* Back-compat: existing .surface refs map to light card */
+  .surface {
+    @apply bg-ivory-50 border border-navy-900/[0.08];
   }
 
   .grid-bg {
     background-image: var(--grid-pattern);
     background-size: 56px 56px;
   }
+  .grid-bg-dark {
+    background-image: var(--grid-pattern-dark);
+    background-size: 56px 56px;
+  }
 
   .pill {
-    @apply inline-flex items-center gap-2 px-3 py-1 border border-bone-50/10 bg-ink-800/60 backdrop-blur-md font-display uppercase tracking-[0.2em] text-[0.65rem] font-medium;
+    @apply inline-flex items-center gap-2 px-3 py-1 border border-navy-900/15 bg-ivory-50/90 backdrop-blur-md font-display uppercase tracking-[0.2em] text-[0.65rem] font-medium text-navy-900;
+  }
+  .pill-dark {
+    @apply inline-flex items-center gap-2 px-3 py-1 border border-ivory-50/15 bg-navy-900/70 backdrop-blur-md font-display uppercase tracking-[0.2em] text-[0.65rem] font-medium text-ivory-50;
+  }
+  .pill-red {
+    @apply inline-flex items-center gap-2 px-3 py-1 bg-red-500 text-ivory-50 font-display uppercase tracking-[0.2em] text-[0.65rem] font-semibold;
   }
 
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-safety-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-50;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-  .text-pretty {
-    text-wrap: pretty;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 }

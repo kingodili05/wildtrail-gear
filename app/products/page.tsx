@@ -5,7 +5,7 @@ import { CATEGORIES, type CategoryId } from '@/lib/products';
 export const metadata: Metadata = {
   title: 'The Vault Inventory',
   description:
-    'Browse the complete WildTrail Gear inventory: industrial power, broadcast-grade field streaming, and precision tools.',
+    'Browse the complete WildTrail Gear inventory: broadcast cameras, drones, off-grid power, fishing electronics, and field audio.',
 };
 
 type SearchParams = {
@@ -29,21 +29,21 @@ export default async function ProductsPage({
 
   return (
     <>
-      <section className="relative bg-ink-950 border-b border-bone-50/[0.06]">
-        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
+      <section className="relative bg-navy-950 text-ivory-50 border-b border-ivory-50/[0.06]">
+        <div className="absolute inset-0 grid-bg-dark opacity-30 pointer-events-none" />
         <div className="container-wt relative py-20 md:py-28">
-          <div className="eyebrow mb-4">Vault Inventory</div>
-          <h1 className="display-h1 text-bone-50 max-w-4xl">
-            Every System. <span className="text-safety-500">Sorted By Power.</span>
+          <div className="eyebrow mb-4">Catalog Inventory</div>
+          <h1 className="display-h1 text-ivory-50 max-w-4xl">
+            Every System. <span className="text-red-500">Sorted By Power.</span>
           </h1>
-          <p className="text-bone-200 mt-6 max-w-[60ch] text-lg leading-relaxed">
-            Highest-value systems first. Filter by loadout, sort by price, or by stock
+          <p className="text-ivory-200 mt-6 max-w-[60ch] text-lg leading-relaxed">
+            Highest-value systems first. Filter by division, sort by price, or by stock
             posture. Every line item is serialized, logged, and field-validated.
           </p>
         </div>
       </section>
 
-      <section className="bg-ink-950 py-12 md:py-16">
+      <section className="bg-ivory-50 py-12 md:py-16">
         <div className="container-wt">
           <ProductGrid initialCategory={category} focusSlug={focusSlug} />
         </div>

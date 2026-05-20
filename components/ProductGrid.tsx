@@ -20,7 +20,7 @@ const SORT_LABEL: Record<SortKey, string> = {
   price_desc: 'Price · High → Low',
   price_asc: 'Price · Low → High',
   name_asc: 'Name · A → Z',
-  stock_first: 'In Vault First',
+  stock_first: 'In Stock First',
 };
 
 const STOCK_LABEL: Record<StockFilter, string> = {
@@ -80,10 +80,10 @@ export default function ProductGrid({
 
   return (
     <div className="space-y-10">
-      <div className="surface">
-        <div className="px-5 py-4 border-b border-bone-50/[0.06] flex flex-wrap items-center gap-3">
-          <Filter className="w-4 h-4 text-safety-500 flex-shrink-0" />
-          <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300 mr-2">
+      <div className="bg-ivory-50 border border-navy-900/[0.08] shadow-card">
+        <div className="px-5 py-4 border-b border-navy-900/[0.08] flex flex-wrap items-center gap-3">
+          <Filter className="w-4 h-4 text-red-600 flex-shrink-0" />
+          <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-graphite-500 mr-2">
             Division
           </span>
           <div className="flex flex-wrap gap-1.5 flex-1">
@@ -107,7 +107,7 @@ export default function ProductGrid({
                 setCategory('all');
                 setStock('all');
               }}
-              className="inline-flex items-center gap-1 font-display text-[0.7rem] uppercase tracking-[0.2em] font-semibold text-bone-300 hover:text-safety-500 transition-colors focus-ring"
+              className="inline-flex items-center gap-1 font-display text-[0.7rem] uppercase tracking-[0.2em] font-semibold text-graphite-500 hover:text-red-600 transition-colors focus-ring"
             >
               <X className="w-3 h-3" />
               Reset
@@ -117,7 +117,7 @@ export default function ProductGrid({
 
         <div className="px-5 py-4 flex flex-col lg:flex-row lg:items-center gap-4">
           <div className="flex flex-wrap items-center gap-3 flex-1">
-            <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300 mr-2">
+            <span className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-graphite-500 mr-2">
               Status
             </span>
             <div className="flex flex-wrap gap-1.5">
@@ -129,14 +129,14 @@ export default function ProductGrid({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <SortDesc className="w-4 h-4 text-safety-500" />
-            <label className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-bone-300">
+            <SortDesc className="w-4 h-4 text-red-600" />
+            <label className="font-display text-[0.7rem] tracking-[0.3em] uppercase text-graphite-500">
               Sort
             </label>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortKey)}
-              className="bg-ink-800 border border-bone-50/10 text-bone-50 font-display text-[0.78rem] uppercase tracking-[0.18em] font-medium px-3 py-2 focus-ring"
+              className="bg-ivory-100 border border-navy-900/[0.15] text-navy-900 font-display text-[0.78rem] uppercase tracking-[0.18em] font-medium px-3 py-2 focus-ring"
             >
               {(Object.keys(SORT_LABEL) as SortKey[]).map((s) => (
                 <option key={s} value={s}>
@@ -149,26 +149,26 @@ export default function ProductGrid({
       </div>
 
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-bone-300">
-          Showing <span className="text-bone-50 font-bold">{filtered.length}</span> of{' '}
+        <div className="font-mono text-[0.7rem] uppercase tracking-[0.3em] text-graphite-500">
+          Showing <span className="text-navy-900 font-bold">{filtered.length}</span> of{' '}
           {PRODUCTS.length} systems
           {activeCategory && (
             <span> · {activeCategory.shortName}</span>
           )}
         </div>
         {focusSlug && (
-          <div className="pill text-safety-500 border-safety-500/30">
+          <div className="pill-red">
             Search Focus · {focusSlug}
           </div>
         )}
       </div>
 
       {filtered.length === 0 ? (
-        <div className="surface p-16 text-center">
-          <div className="font-display text-2xl uppercase tracking-tight text-bone-50 mb-2">
+        <div className="bg-ivory-50 border border-navy-900/[0.08] p-16 text-center">
+          <div className="font-display text-2xl uppercase tracking-tight text-navy-900 mb-2">
             Empty For That Filter
           </div>
-          <p className="text-bone-300">Clear a filter to see more systems.</p>
+          <p className="text-graphite-500">Clear a filter to see more systems.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -197,8 +197,8 @@ function FilterPill({
       className={cn(
         'px-3 py-1.5 border font-display text-[0.7rem] uppercase tracking-[0.2em] font-semibold transition-colors focus-ring',
         active
-          ? 'bg-safety-600 border-safety-600 text-ink-950'
-          : 'border-bone-50/10 text-bone-200 hover:border-bone-50/30 hover:text-bone-50',
+          ? 'bg-navy-900 border-navy-900 text-ivory-50'
+          : 'border-navy-900/15 text-graphite-700 hover:border-navy-900/40 hover:text-navy-900',
       )}
     >
       {children}

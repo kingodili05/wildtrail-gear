@@ -51,30 +51,30 @@ export default function SearchOverlay({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-ink-950/85 backdrop-blur-md p-4 sm:p-8 flex items-start justify-center"
+      className="fixed inset-0 z-50 bg-navy-950/65 backdrop-blur-md p-4 sm:p-8 flex items-start justify-center"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label="Search products"
     >
       <div
-        className="w-full max-w-2xl bg-ink-900 border border-bone-50/10 shadow-elev mt-12 sm:mt-24"
+        className="w-full max-w-2xl bg-ivory-50 border border-navy-900/[0.08] shadow-elev mt-12 sm:mt-24"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-bone-50/10">
-          <Search className="w-5 h-5 text-safety-500 flex-shrink-0" />
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-navy-900/[0.08]">
+          <Search className="w-5 h-5 text-red-600 flex-shrink-0" />
           <input
             ref={inputRef}
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search inverters, drones, broadcast rigs…"
-            className="flex-1 bg-transparent outline-none text-bone-50 placeholder:text-bone-300 font-sans"
+            placeholder="Search cameras, drones, broadcast rigs…"
+            className="flex-1 bg-transparent outline-none text-navy-900 placeholder:text-graphite-400 font-sans"
           />
           <button
             type="button"
             onClick={onClose}
-            className="inline-grid place-items-center w-8 h-8 text-bone-300 hover:text-bone-50 focus-ring"
+            className="inline-grid place-items-center w-8 h-8 text-graphite-500 hover:text-navy-900 focus-ring"
             aria-label="Close search"
           >
             <X className="w-4 h-4" />
@@ -82,30 +82,30 @@ export default function SearchOverlay({
         </div>
         <div className="max-h-[60vh] overflow-y-auto">
           {results.length === 0 ? (
-            <div className="px-5 py-8 text-center text-bone-300 text-sm">
+            <div className="px-5 py-8 text-center text-graphite-500 text-sm">
               No gear matches that query.
             </div>
           ) : (
             <ul>
               {results.map((p) => (
-                <li key={p.id} className="border-b border-bone-50/[0.06] last:border-b-0">
+                <li key={p.id} className="border-b border-navy-900/[0.06] last:border-b-0">
                   <Link
                     href={`/products?focus=${p.slug}`}
                     onClick={onClose}
-                    className="flex items-center gap-4 px-5 py-4 hover:bg-ink-800 transition-colors"
+                    className="flex items-center gap-4 px-5 py-4 hover:bg-ivory-100 transition-colors"
                   >
-                    <span className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-safety-500 w-20">
+                    <span className="font-display text-[0.68rem] tracking-[0.3em] uppercase text-red-600 w-20">
                       {p.category}
                     </span>
                     <span className="flex-1">
-                      <span className="block font-display font-bold uppercase tracking-tight text-bone-50">
+                      <span className="block font-display font-bold uppercase tracking-tight text-navy-900">
                         {p.name}
                       </span>
-                      <span className="block text-bone-300 text-sm line-clamp-1">
+                      <span className="block text-graphite-500 text-sm line-clamp-1">
                         {p.description}
                       </span>
                     </span>
-                    <span className="font-display font-bold tabular-nums text-bone-50">
+                    <span className="font-display font-bold tabular-nums text-navy-900">
                       {money(p.price)}
                     </span>
                   </Link>

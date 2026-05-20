@@ -67,15 +67,15 @@ export default function CategoryGrid() {
   const rest = populatedCategories().filter((c) => !PILLAR_IDS.includes(c.id));
 
   return (
-    <section className="relative py-24 md:py-32 bg-ink-950">
+    <section className="relative py-24 md:py-32 bg-ivory-50">
       <div className="container-wt">
         <Reveal>
           <div className="flex items-end justify-between flex-wrap gap-6 mb-12">
             <div>
               <div className="eyebrow mb-4">Inventory Divisions</div>
-              <h2 className="display-h2 text-bone-50">Pillar Categories</h2>
+              <h2 className="display-h2 text-navy-900">Pillar Categories</h2>
             </div>
-            <Link href="/products" className="btn btn-outline">
+            <Link href="/products" className="btn btn-outline-dark">
               View Every Division
               <ArrowUpRight className="w-4 h-4" />
             </Link>
@@ -93,33 +93,33 @@ export default function CategoryGrid() {
                 <TiltCard maxTiltDeg={6} scale={1.015}>
                   <Link
                     href={`/products?category=${c.id}`}
-                    className="group block focus-ring bg-ink-900 border border-bone-50/[0.06] hover:border-bone-50/20 overflow-hidden transition-colors"
+                    className="group block focus-ring bg-navy-900 border border-navy-900/[0.06] hover:border-red-500/40 overflow-hidden transition-colors"
                   >
                     <div className="aspect-[4/5] relative overflow-hidden">
                       <div
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                         style={{ backgroundImage: img ? `url('${img}')` : undefined }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/20" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-navy-950/20" />
                       <div className="absolute top-5 left-5 right-5 flex items-start justify-between">
-                        <span className="pill text-safety-500 border-safety-500/30 bg-ink-950/70">
+                        <span className="pill-dark border-red-500/40 text-red-400">
                           0{i + 1} / Pillar
                         </span>
-                        <span className="inline-grid place-items-center w-10 h-10 bg-safety-600 text-ink-950 group-hover:bg-safety-500 transition-colors">
+                        <span className="inline-grid place-items-center w-10 h-10 bg-red-600 text-ivory-50 group-hover:bg-red-500 transition-colors">
                           <Icon className="w-5 h-5" />
                         </span>
                       </div>
                       <div className="absolute inset-x-5 bottom-5 space-y-3">
-                        <div className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-bone-300">
+                        <div className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-ivory-200">
                           {count} systems · From {money(min)}
                         </div>
-                        <h3 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-tight text-bone-50 leading-[0.95]">
+                        <h3 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-tight text-ivory-50 leading-[0.95]">
                           {c.shortName}
                         </h3>
-                        <p className="text-bone-200 text-sm leading-relaxed line-clamp-3 max-w-[42ch]">
+                        <p className="text-ivory-200 text-sm leading-relaxed line-clamp-3 max-w-[42ch]">
                           {c.description}
                         </p>
-                        <div className="inline-flex items-center gap-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-semibold text-safety-500 pt-2">
+                        <div className="inline-flex items-center gap-2 font-display text-[0.78rem] uppercase tracking-[0.22em] font-semibold text-red-400 pt-2">
                           Open Division
                           <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                         </div>
@@ -136,16 +136,14 @@ export default function CategoryGrid() {
           <div className="flex items-end justify-between flex-wrap gap-6 mb-8">
             <div>
               <div className="eyebrow mb-4">Every Division</div>
-              <h3 className="display-h2 text-bone-50">
-                The Full Index
-              </h3>
+              <h3 className="display-h2 text-navy-900">The Full Index</h3>
             </div>
           </div>
         </Reveal>
 
         <Stagger
           step={0.04}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-bone-50/[0.06] border border-bone-50/[0.06]"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-navy-900/[0.08] border border-navy-900/[0.08]"
         >
           {rest.map((c) => {
             const Icon = CATEGORY_ICON[c.id];
@@ -155,16 +153,16 @@ export default function CategoryGrid() {
               <StaggerItem key={c.id}>
                 <Link
                   href={`/products?category=${c.id}`}
-                  className="group block bg-ink-900 hover:bg-ink-800 p-6 transition-colors focus-ring h-full"
+                  className="group block bg-ivory-50 hover:bg-ivory-100 p-6 transition-colors focus-ring h-full"
                 >
                   <div className="flex items-start justify-between mb-6">
-                    <Icon className="w-6 h-6 text-safety-500" />
-                    <ArrowUpRight className="w-4 h-4 text-bone-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-bone-50" />
+                    <Icon className="w-6 h-6 text-red-600" />
+                    <ArrowUpRight className="w-4 h-4 text-graphite-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-navy-900" />
                   </div>
-                  <h4 className="font-display font-bold uppercase tracking-tight text-bone-50 text-base leading-tight mb-2">
+                  <h4 className="font-display font-bold uppercase tracking-tight text-navy-900 text-base leading-tight mb-2">
                     {c.shortName}
                   </h4>
-                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.3em] text-bone-400">
+                  <div className="font-mono text-[0.62rem] uppercase tracking-[0.3em] text-graphite-500">
                     {count} {count === 1 ? 'system' : 'systems'}
                     {count > 0 && <span> · From {money(min)}</span>}
                   </div>
