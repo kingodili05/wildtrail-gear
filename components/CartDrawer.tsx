@@ -260,7 +260,18 @@ function CartSkeleton() {
   return (
     <div className="px-6 py-8 space-y-4">
       {[0, 1].map((i) => (
-        <div key={i} className="h-22 bg-ivory-100 animate-pulse" />
+        <div
+          key={i}
+          className="skeleton h-22 grid grid-cols-[64px,1fr,auto] gap-4 items-center p-4"
+          aria-hidden="true"
+        >
+          <div className="skeleton w-16 h-16 bg-ivory-200" />
+          <div className="space-y-2">
+            <div className="skeleton h-4 w-3/4 bg-ivory-200" />
+            <div className="skeleton h-3 w-1/2 bg-ivory-200" />
+          </div>
+          <div className="skeleton h-4 w-16 bg-ivory-200" />
+        </div>
       ))}
     </div>
   );

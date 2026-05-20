@@ -52,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${GeistSans.variable} ${GeistMono.variable} ${rajdhani.variable}`}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-[100dvh] flex flex-col">
         <Nav />
         <main className="flex-1 pt-20">{children}</main>
         <Ticker />
