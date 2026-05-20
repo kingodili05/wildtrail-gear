@@ -57,7 +57,7 @@ export const DEFAULT_PAYMENT_SETTINGS: PaymentSettings = {
     instructions:
       'Write the order reference (e.g. WT-XXXX-1234) on the back of the check. Orders are reserved for 14 days awaiting receipt of payment.',
   },
-  supportEmail: 'orders@wildtrailgear.store',
+  supportEmail: 'order@wildtrailgear.store',
   supportPhone: '+1 (555) 000-0000',
 };
 
