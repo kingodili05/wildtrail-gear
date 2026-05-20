@@ -16,7 +16,7 @@ const rajdhani = Rajdhani({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wildtrail.gear'),
+  metadataBase: new URL('https://wildtrailgear.store'),
   title: {
     default: 'WildTrail Gear — Equipping The Wild. Streaming The Adventure.',
     template: '%s · WildTrail Gear',
